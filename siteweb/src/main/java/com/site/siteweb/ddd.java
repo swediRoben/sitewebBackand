@@ -1,4 +1,4 @@
-package src.main.java.com.site.siteweb;
+package com.site.siteweb;
 
 public class ddd {
     
