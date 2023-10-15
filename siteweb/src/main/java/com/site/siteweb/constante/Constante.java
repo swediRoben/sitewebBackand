@@ -25,7 +25,14 @@ public class Constante {
         PROJETENCOURS {
             public String toString() {
                 return "PROJET EN COURS";
-            }} 
+            }
+        },
+        OFFRE {
+            public String toString() {
+                return "OFFRES D'EMPLOIS";
+            }
+        } 
+        
         }
    
     
@@ -60,6 +67,29 @@ public class Constante {
         }  
     }
 
+    	public enum langue {
+        fr {
+            public String toString() {
+                return "FRANÇAIS";
+            }
+        },
+        en {
+            public String toString() {
+                return "ENGISH";
+            }
+        },
+        kisw {
+            public String toString() {
+                return "KISWAHILI";
+            }
+        },
+        bu {
+            public String toString() {
+                return "KIRUNDI";
+            }
+        } 
+    }
+
     	public enum typeMail {
         gmail {
             public String toString() {
@@ -72,4 +102,23 @@ public class Constante {
             }
         }   
     }
+
+    	public enum travail {
+        emploi {
+            public String toString() {
+                return "EMPLOI";
+            }
+        },
+        benevole {
+            public String toString() {
+                return "BENEVOLE";
+            }
+        },
+        stage {
+            public String toString() {
+                return "STAGE";
+            }
+        } 
+    }
+
 }

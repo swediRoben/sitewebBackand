@@ -12,7 +12,7 @@ import com.site.siteweb.helpers.ResponseHelper;
  
 
 @RestController
-@RequestMapping("/constantes_param")
+@RequestMapping("/constante")
 @CrossOrigin(origins = "*")
 public class ConstanteController {
     
@@ -56,6 +56,28 @@ public class ConstanteController {
 		
 		if (!data.getTypeMail().isEmpty()) {
 			return new ResponseEntity<>(new ResponseHelper("constante", data.getTypeMail(), true), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(new ResponseHelper("constante null", false), HttpStatus.OK);
+		}
+
+	}
+
+	@GetMapping("/langue") 
+	public ResponseEntity<Object> getLangue() {
+		
+		if (!data.getLangue().isEmpty()) {
+			return new ResponseEntity<>(new ResponseHelper("constante", data.getLangue(), true), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(new ResponseHelper("constante null", false), HttpStatus.OK);
+		}
+
+	}
+
+	@GetMapping("/travail") 
+	public ResponseEntity<Object> getTravail() {
+		
+		if (!data.getLangue().isEmpty()) {
+			return new ResponseEntity<>(new ResponseHelper("constante", data.getTravail(), true), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(new ResponseHelper("constante null", false), HttpStatus.OK);
 		}

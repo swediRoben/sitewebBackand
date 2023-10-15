@@ -29,9 +29,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/house?createDataBaseIfNotExist=true
-    username: house
-    password: house123
+    url: jdbc:mysql://localhost:3306/siteweb
+    username: fafa
+    password: fafa
   jpa:
     show-sql: true
     hibernate:

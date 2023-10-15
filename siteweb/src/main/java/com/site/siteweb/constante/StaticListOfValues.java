@@ -3,7 +3,9 @@ package com.site.siteweb.constante;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.site.siteweb.constante.Constante.langue;
 import com.site.siteweb.constante.Constante.roles;
+import com.site.siteweb.constante.Constante.travail;
 import com.site.siteweb.constante.Constante.type;
 import com.site.siteweb.constante.Constante.typeFichier;
 import com.site.siteweb.constante.Constante.typeMail; 
@@ -62,6 +64,31 @@ public class StaticListOfValues {
 		staticValues.clear();
 		int i = 0;
 		for (typeMail t : typeMail.values()) {
+			StaticValue sv = new StaticValue(i, t.toString());
+			staticValues.add(sv); 
+			i++;
+		
+		}
+		return staticValues;
+	}
+
+
+		public List<StaticValue> getLangue() {
+		staticValues.clear();
+		int i = 0;
+		for (langue l : langue.values()) {
+			StaticValue sv = new StaticValue(i, l.toString());
+			staticValues.add(sv); 
+			i++;
+		
+		}
+		return staticValues;
+	}
+
+		public List<StaticValue> getTravail() {
+		staticValues.clear();
+		int i = 0;
+		for (travail t : travail.values()) {
 			StaticValue sv = new StaticValue(i, t.toString());
 			staticValues.add(sv); 
 			i++;
