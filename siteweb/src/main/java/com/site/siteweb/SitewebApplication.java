@@ -7,8 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SitewebApplication {
 
 	public static void main(String[] args) { 
-		SpringApplication.run(SitewebApplication.class, args);
-		System.out.println("sds");
+		SpringApplication.run(SitewebApplication.class, args); 
 	}
 
 }
