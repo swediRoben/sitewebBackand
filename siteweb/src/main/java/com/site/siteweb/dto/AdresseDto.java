@@ -9,5 +9,5 @@ public class AdresseDto {
     private String telephone;  
     private String adresse;
     private String datedebut;
-    private String datfin;
+    private String datefin;
 }

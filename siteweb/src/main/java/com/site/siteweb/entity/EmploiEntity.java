@@ -18,7 +18,8 @@ public class EmploiEntity {
     @Column(name = "id", length = 11)
     private Long id;
     private String nom; 
-    private int typemail;
+    private String mail; 
+    private String telephone;
     private Data datenaissance; 
     private String adresse; 
     private String cv; 

@@ -2,10 +2,11 @@ package com.site.siteweb.dto;
  
 import lombok.Data;
 @Data 
-public class EmploIDto { 
+public class EmploiDto { 
     private Long id;
     private String nom; 
-    private int typemail;
+    private String mail; 
+    private String telephone;
     private Data datenaissance; 
     private String adresse; 
     private String cv; 

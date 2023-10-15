@@ -23,5 +23,5 @@ public class AdresseEntity {
     private String telephone;  
     private String adresse;
     private Date datedebut;
-    private Date datfin;
+    private Date datefin;
 }

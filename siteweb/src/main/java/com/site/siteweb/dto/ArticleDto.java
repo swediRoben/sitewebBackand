@@ -6,8 +6,10 @@ import lombok.Data;
 public class ArticleDto {
     private Long id;
     private int type;
-    private String idusercreate; 
-    private String idusermodif;   
+    private Long idusercreate; 
+    private Long idusermodif;  
+    private String usercreate; 
+    private String usermodif;   
     private String urlfile; 
     private int typefichier;
     private String titre; 

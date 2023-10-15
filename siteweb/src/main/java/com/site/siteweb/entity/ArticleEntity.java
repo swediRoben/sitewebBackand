@@ -17,8 +17,8 @@ public class ArticleEntity {
     @Column(name = "id", length = 11)
     private Long id;
     private int type;
-    private String idusercreate; 
-    private String idusermodif;   
+    private Long idusercreate; 
+    private Long idusermodif;   
     private String urlfile; 
     private int typefichier;
     private String titre; 
