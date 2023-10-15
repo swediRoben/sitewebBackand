@@ -1,6 +1,5 @@
 package com.site.siteweb.dto;
-
-import java.sql.Date;
+ 
 import lombok.Data;
 @Data
 public class ArticleDto {
@@ -15,6 +14,6 @@ public class ArticleDto {
     private String titre; 
     private String content;
     private int langue;  
-    private Date datecreate;
-    private Date dateupdate;   
+    private String datecreate;
+    private String dateupdate;   
 }

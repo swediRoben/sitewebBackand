@@ -1,7 +1,6 @@
 package com.site.siteweb.convert;
  
 import com.site.siteweb.dto.TokenDto;
-import com.site.siteweb.entity.EmploiEntity;
 import com.site.siteweb.entity.TokenEntity;
 import com.site.siteweb.helpers.DateHelper;
 
