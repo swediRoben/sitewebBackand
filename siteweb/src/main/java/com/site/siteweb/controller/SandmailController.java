@@ -16,10 +16,11 @@ import jakarta.mail.MessagingException;
 @CrossOrigin(origins = "*")
 public class SandmailController { 
 	
-  private final MailSenderService mailService;
+  @Autowired
+  private MailSenderService mailService;
 
   @GetMapping("/send-email")
   public void sendEmail() throws IOException, MessagingException {
-    mailService.sendNewMail("test@gmail.com", "Subject right here", "Body right there!")
+    mailService.sendNewMail("test@gmail.com", "Subject right here", "Body right there!");
   }
 }
