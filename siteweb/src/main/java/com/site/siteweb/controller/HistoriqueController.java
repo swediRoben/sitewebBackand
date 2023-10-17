@@ -3,6 +3,10 @@ package com.site.siteweb.controller;
 // import java.util.Locale;
 // import java.util.Map;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 // import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.http.HttpStatus;
 // import org.springframework.http.ResponseEntity;
@@ -21,9 +25,9 @@ package com.site.siteweb.controller;
 // import com.house.service.HistoriqueService; 
 
 
-// @CrossOrigin(origins = "*")
-// @RestController
-// @RequestMapping("/historique")
+@CrossOrigin(origins = "*")
+@RestController
+@RequestMapping("/historique")
 public class HistoriqueController {
 
     // @Autowired
