@@ -20,7 +20,7 @@ public class EmploiEntity {
     private String nom; 
     private String mail; 
     private String telephone;
-    private Data datenaissance; 
+    private Date datenaissance; 
     private String adresse; 
     private String cv; 
     private int typedemende; 

@@ -7,7 +7,7 @@ public class EmploiDto {
     private String nom; 
     private String mail; 
     private String telephone;
-    private Data datenaissance; 
+    private String datenaissance; 
     private String adresse; 
     private String cv; 
     private int typedemende; 
