@@ -21,6 +21,6 @@ public class SandmailController {
 
   @GetMapping("/send-email")
   public void sendEmail() throws IOException, MessagingException {
-    mailService.sendNewMail("swediroben@gmail.com", "Subject right here", "Body right there!");
+   // mailService.sendNewMail("swediroben@gmail.com", "Subject right here", "Body right there!");
   }
 }

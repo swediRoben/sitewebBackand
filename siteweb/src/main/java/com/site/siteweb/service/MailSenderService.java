@@ -9,13 +9,14 @@ public class MailSenderService {
     @Autowired
     private JavaMailSender mailSender;
 
-    public void sendNewMail(String to, String subject, String body) {
+    public void sendNewMail() {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("farajampenda43@gmail.com");
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(body);
+        message.setTo("swediroben@gmail.com");
+        message.setSubject("subject");
+        message.setText("message ");
         mailSender.send(message);
+        System.out.println("message envoyer");
     }
 }
  
