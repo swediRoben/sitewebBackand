@@ -5,7 +5,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO; 
 public class image {
 
-    public static void main(String[] args) {
+    public static void gfdgf() {
         try {
             // Charger l'image
             BufferedImage image = ImageIO.read(new File("path/to/image.jpg"));
