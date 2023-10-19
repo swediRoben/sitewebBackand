@@ -11,16 +11,16 @@ import com.site.siteweb.service.MailSenderService;
 @SpringBootApplication
 public class SitewebApplication {
 
-  @Autowired
-  private MailSenderService mailService;
+//   @Autowired
+//   private MailSenderService mailService;
 	public static void main(String[] args) { 
 		SpringApplication.run(SitewebApplication.class, args); 
 	}
 
-	@EventListener(ApplicationReadyEvent.class)
-	public void sandmessage()
-	{
-		mailService.sendNewMail();
-	}
+	// @EventListener(ApplicationReadyEvent.class)
+	// public void sandmessage()
+	// {
+	// 	mailService.sendNewMail();
+	// }
 
 }
