@@ -62,9 +62,9 @@ public class TokenService {
       String tokens = token;
       String[] parts = tokens.split(" "); 
       String value = parts[1]; 
-          Date date = new Date();
-          SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-          String formattedDate = dateFormat.format(date);
+         Date date = new Date();
+         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = dateFormat.format(date);
         Date today = new Date(); 
         return repoTocken.checkToken(value,formattedDate);
     }
