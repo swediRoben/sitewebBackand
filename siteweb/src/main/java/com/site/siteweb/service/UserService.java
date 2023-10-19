@@ -14,6 +14,8 @@ public class UserService {
     public boolean login(LoginContent login) {
        UsersEntity users= repository.findByMailAndPassword(login.getEmail(),login.getPassword());
         if (login.getEmail()=="faraja2012@gmail.com" && login.getPassword()=="faraja2012" || users.getMail()==login.getEmail() && users.getPassword()==login.getPassword()) {
+            return true;
+        }else{
             return false;
         }
         
