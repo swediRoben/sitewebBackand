@@ -1,5 +1,6 @@
 package com.site.siteweb.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity; 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -19,7 +21,7 @@ import com.site.siteweb.dto.TokenDto;
 import com.site.siteweb.helpers.MessageHelper;
 import com.site.siteweb.helpers.ResponseHelper;
 import com.site.siteweb.service.TokenService;
-import com.site.siteweb.service.UserService;
+import com.site.siteweb.service.UserService; 
 
 @RestController
 @RequestMapping("/login")
@@ -50,4 +52,15 @@ public class ConnectionController {
                 }
 
         }
+
+        @GetMapping("/check/")
+      public String checkpassword(@RequestHeader("Authorization") String jeton) {
+        System.out.println(jeton);
+        boolean d=token.checkTocken(jeton);
+        if (d) {
+           return "date n'est pas superieur"; 
+        } else {
+           return "date est superieur"; 
+        }
+      }  
 }

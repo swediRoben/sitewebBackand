@@ -1,5 +1,6 @@
 package com.site.siteweb.service;
  
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class TokenService {
               
                 String encodedPassword = new BCryptPasswordEncoder().encode(login.getPassword()+""+login.getEmail()+"faraja"+time);
                 token.setDatedebut(today);
-                token.setDatedebut(tomorrow);
+                token.setDatfin(tomorrow); 
                 token.setEmail(login.getEmail());
                 token.setPassword(login.getPassword());
                 token.setPasswordrolehash(encodedPassword);
@@ -47,7 +48,7 @@ public class TokenService {
                 
                 String encodedPassword = new BCryptPasswordEncoder().encode(login.getPassword()+""+login.getEmail()+"faraja"+time);
                 token.setDatedebut(today);
-                token.setDatedebut(tomorrow);
+                token.setDatfin(tomorrow); 
                 token.setEmail(login.getEmail());
                 token.setPassword(login.getPassword());
                 token.setPasswordrolehash(encodedPassword);
@@ -58,8 +59,14 @@ public class TokenService {
     }
 
      public boolean checkTocken(String token) {
+      String tokens = token;
+      String[] parts = tokens.split(" "); 
+      String value = parts[1]; 
+          Date date = new Date();
+          SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+          String formattedDate = dateFormat.format(date);
         Date today = new Date(); 
-        return repoTocken.checkToken(token,today);
+        return repoTocken.checkToken(value,formattedDate);
     }
 
     public boolean deleteTocken(LoginContent login) {

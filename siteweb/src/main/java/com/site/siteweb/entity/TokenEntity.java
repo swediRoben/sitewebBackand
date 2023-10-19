@@ -8,6 +8,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Data;
 
 @Entity
@@ -24,6 +26,8 @@ public class TokenEntity {
 
     private String email;   
     private String password;   
+     @Temporal(TemporalType.DATE)
     private Date datedebut;
+     @Temporal(TemporalType.DATE)
     private Date datfin;
 }
