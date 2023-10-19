@@ -35,12 +35,35 @@ public class TokenService {
     }
 
      public boolean checkTocken(String login) {
-        return true;
+        Date today = new Date(); 
+        return repoTocken.checkToken(login,today);
     }
 
     public boolean deleteTocken(LoginContent login) {
          Date today = new Date(); 
          TokenEntity tokens=repoTocken.findByEmailAndPassword(login.getEmail(),login.getPassword()); 
+            SimpleDateFormat sdf = new SimpleDateFormat("d"); 
+
+         if (tokens!=null) {
+             String dayToday = sdf.format(today);
+             String daydataBase = sdf.format(tokens.getDatfin());
+               System.out.println("day est :"+dayToday);
+               System.out.println("dayDatabase est :"+daydataBase);
+             if (dayToday==daydataBase) {
+                repoTocken.deleteById(tokens.getId());
+                return true;
+             }else{
+                return false;
+             }
+         }else{
+            return false;
+         }
+    }
+
+
+        public boolean deleteByToken(String token) {
+         Date today = new Date(); 
+         TokenEntity tokens=repoTocken.findByPasswordrolehash(token); 
             SimpleDateFormat sdf = new SimpleDateFormat("d"); 
 
          if (tokens!=null) {
