@@ -1,6 +1,5 @@
 package com.site.siteweb.service;
-
-import java.text.SimpleDateFormat;
+ 
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +22,9 @@ public class TokenService {
        
         Date today = new Date();
         Date tomorrow = new Date(today.getTime() + (1000 * 60 * 60 * 24));
+        String time=""+today.getTime();
         
-        String encodedPassword = new BCryptPasswordEncoder().encode(login.getPassword()+""+login.getEmail()+"faraja");
+        String encodedPassword = new BCryptPasswordEncoder().encode(login.getPassword()+""+login.getEmail()+"faraja"+time);
         token.setDatedebut(today);
         token.setDatedebut(tomorrow);
         token.setEmail(login.getEmail());
