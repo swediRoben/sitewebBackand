@@ -11,8 +11,7 @@ public class TokenConvert {
 
      public TokenDto toDto(TokenEntity t) {
         TokenDto dto = new TokenDto();
-        dto.setId(t.getId());
-        dto.setIduser(t.getIduser()); 
+        dto.setId(t.getId()); 
         dto.setPasswordrolehash(t.getPasswordrolehash());
         dto.setDatedebut(DateHelper.toText(t.getDatedebut())); 
         dto.setDatfin(DateHelper.toText(t.getDatfin()));  
@@ -22,9 +21,10 @@ public class TokenConvert {
 
         public TokenEntity toDto(TokenDto t) {
         TokenEntity entity= new TokenEntity();
-        entity.setId(t.getId());
-        entity.setIduser(t.getIduser()); 
+        entity.setId(t.getId()); 
         entity.setPasswordrolehash(t.getPasswordrolehash());
+        entity.setEmail(t.getEmail());
+        entity.setPassword(t.getPassword());
         entity.setDatedebut(DateHelper.toDate(t.getDatedebut())); 
         entity.setDatfin(DateHelper.toDate(t.getDatfin()));  
 

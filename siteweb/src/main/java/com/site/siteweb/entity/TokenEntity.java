@@ -17,9 +17,13 @@ public class TokenEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", length = 11)
-    private Long id;
-    private Long iduser;
-    private String passwordrolehash;   
+    private Long id; 
+
+    @Column(unique=true)
+    private String passwordrolehash;
+
+    private String email;   
+    private String password;   
     private Date datedebut;
     private Date datfin;
 }
