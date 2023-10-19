@@ -34,52 +34,21 @@ public class TokenService {
         return TokenConvert.getInstance().toDto(tokens);
     }
 
-     public boolean checkTocken(String login) {
+     public boolean checkTocken(String token) {
         Date today = new Date(); 
-        return repoTocken.checkToken(login,today);
+        return repoTocken.checkToken(token,today);
     }
 
     public boolean deleteTocken(LoginContent login) {
          Date today = new Date(); 
-         TokenEntity tokens=repoTocken.findByEmailAndPassword(login.getEmail(),login.getPassword()); 
-            SimpleDateFormat sdf = new SimpleDateFormat("d"); 
+         TokenEntity tokens=repoTocken.getByEmailAndPassword(login.getEmail(),login.getPassword(),today);  
 
-         if (tokens!=null) {
-             String dayToday = sdf.format(today);
-             String daydataBase = sdf.format(tokens.getDatfin());
-               System.out.println("day est :"+dayToday);
-               System.out.println("dayDatabase est :"+daydataBase);
-             if (dayToday==daydataBase) {
+         if (tokens!=null) {   
                 repoTocken.deleteById(tokens.getId());
-                return true;
-             }else{
-                return false;
-             }
+                return true; 
          }else{
             return false;
          }
-    }
-
-
-        public boolean deleteByToken(String token) {
-         Date today = new Date(); 
-         TokenEntity tokens=repoTocken.findByPasswordrolehash(token); 
-            SimpleDateFormat sdf = new SimpleDateFormat("d"); 
-
-         if (tokens!=null) {
-             String dayToday = sdf.format(today);
-             String daydataBase = sdf.format(tokens.getDatfin());
-               System.out.println("day est :"+dayToday);
-               System.out.println("dayDatabase est :"+daydataBase);
-             if (dayToday==daydataBase) {
-                repoTocken.deleteById(tokens.getId());
-                return true;
-             }else{
-                return false;
-             }
-         }else{
-            return false;
-         }
-    }
+    } 
         
 }
