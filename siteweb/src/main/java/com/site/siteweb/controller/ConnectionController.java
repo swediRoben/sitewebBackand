@@ -1,20 +1,19 @@
 package com.site.siteweb.controller;
 
+import java.util.HashMap;
 import java.util.Locale;
-
-import org.apache.tomcat.util.descriptor.web.LoginConfig;
+import java.util.Map;
+ 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.StreamingHttpOutputMessage.Body;
+import org.springframework.http.ResponseEntity; 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.site.siteweb.dto.ArticleDto;
+ 
 import com.site.siteweb.dto.LoginContent;
 import com.site.siteweb.dto.TokenDto;
 import com.site.siteweb.helpers.MessageHelper;
@@ -35,10 +34,12 @@ public class ConnectionController {
       @PostMapping("/")
         public ResponseEntity<Object> add(@RequestHeader(name = "Accept-Language", required = false) String localeString,@RequestBody LoginContent login) { 
                 boolean data = service.login(login);  
+                Map<String,String> tokenMap=new HashMap<>(); 
                 if (data) {
                      TokenDto tok=token.createTocken(login);
+                     tokenMap.put("token", tok.getPasswordrolehash());
                         return new ResponseEntity<>(
-                                        new ResponseHelper(MessageHelper.loginSuccess(new Locale(localeString)),tok,
+                                        new ResponseHelper(MessageHelper.loginSuccess(new Locale(localeString)),tokenMap,
                                                         true),
                                         HttpStatus.CREATED);
                 } else {
