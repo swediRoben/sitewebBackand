@@ -41,8 +41,7 @@ public class TokenService {
     public boolean deleteTocken(LoginContent login) {
          Date today = new Date(); 
          TokenEntity tokens=repoTocken.findByEmailAndPassword(login.getEmail(),login.getPassword()); 
-            SimpleDateFormat sdf = new SimpleDateFormat("d");
-          System.out.println("day est :"+);
+            SimpleDateFormat sdf = new SimpleDateFormat("d"); 
 
          if (tokens!=null) {
              String dayToday = sdf.format(today);
