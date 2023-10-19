@@ -12,6 +12,7 @@ import com.site.siteweb.convert.TokenConvert;
 import com.site.siteweb.dto.LoginContent;
 import com.site.siteweb.dto.TokenDto;
 import com.site.siteweb.entity.TokenEntity;
+import com.site.siteweb.helpers.DateHelper;
 import com.site.siteweb.repository.TokenRepository;
 
 @Service
@@ -62,23 +63,18 @@ public class TokenService {
       String tokens = token;
       String[] parts = tokens.split(" "); 
       String value = parts[1]; 
+        TokenEntity tok=repoTocken.findByPasswordrolehash(value); 
          Date date = new Date();
          SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String formattedDate = dateFormat.format(date);
-        Date today = new Date(); 
-        return repoTocken.checkToken(value,formattedDate);
-    }
+        String today = dateFormat.format(date); 
+       String dateFin = DateHelper.toText(tok.getDatfin());
 
-    public boolean deleteTocken(LoginContent login) {
-         Date today = new Date(); 
-         TokenEntity tokens=repoTocken.getByEmailAndPassword(login.getEmail(),login.getPassword(),today);  
-
-         if (tokens!=null) {   
-                repoTocken.deleteById(tokens.getId());
-                return true; 
-         }else{
-            return false;
-         }
+       System.out.println("date debut :"+today +" date fin :"+dateFin);
+        if (today!=dateFin) {
+          return true; 
+        } else {
+          return false;
+        }
     } 
         
 }

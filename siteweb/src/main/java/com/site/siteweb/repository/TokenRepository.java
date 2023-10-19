@@ -14,13 +14,7 @@ public interface TokenRepository extends JpaRepository<TokenEntity, Long> {
 
     TokenEntity findByEmailAndPassword(String email, String password);
 
-    TokenEntity findByPasswordrolehash(String token);
-    
-    @Query("SELECT count(c) > 0 FROM TokenEntity c  WHERE c.passwordrolehash=?1 and c.datfin< ?2 ")
-    boolean checkToken(String login, String today);
-
-   @Query("SELECT c FROM TokenEntity c  WHERE c.email=?1 and c.password=?2  and c.datfin<=?3 ")
-    TokenEntity getByEmailAndPassword(String email, String password, Date today);
+    TokenEntity findByPasswordrolehash(String token);  
 
     @Query("SELECT c FROM TokenEntity c  WHERE c.email=?1 and c.password=?2")
     List<TokenEntity> getByEmailAndPasswords(String email, String password); 
