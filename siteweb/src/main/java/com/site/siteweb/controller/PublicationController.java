@@ -33,7 +33,9 @@ public class PublicationController {
         @GetMapping("/")
         public ResponseEntity<Object> getAll(
                         @RequestParam(required = false) Long id, 
-                        @RequestParam(required = false) Long type,
+                        @RequestParam(required = false) Integer type,
+                        @RequestParam(required = false) Integer typeFichier,
+                        @RequestParam(required = false) Integer langue,
                         @RequestParam(required = false) String description, 
                         @RequestParam(defaultValue = "0") int page, 
                         @RequestParam(defaultValue = "0") int size,
@@ -42,7 +44,7 @@ public class PublicationController {
                 if (size == 0)
                         size = Integer.MAX_VALUE;
  
-                Map<String, Object> data = service.getAlls(id,type,description, page, size, sort);
+                Map<String, Object> data = service.getAlls(id,type,typeFichier,langue,description, page, size, sort);
                 Locale locale = new Locale(localeString);
 
                 if (data.size() > 0) {
@@ -94,7 +96,7 @@ public class PublicationController {
 
         }
 
-         @DeleteMapping("/{id}")
+        @DeleteMapping("/{id}")
         public ResponseEntity<Object> daelete(@PathVariable("id") Long id,@RequestHeader(name = "Accept-Language", required = false) String localeString ) { 
                 boolean data = service.delete(id);  
                 if (data) {

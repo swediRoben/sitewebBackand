@@ -17,14 +17,14 @@ public class ArticleEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", length = 11)
     private Long id;
-    private int type;
+    private Integer type;
     private Long idusercreate; 
     private Long idusermodif;   
     private String urlfile; 
-    private int typefichier;
+    private Integer typefichier;
     private String titre; 
     private String content;
-    private int langue;  
+    private Integer langue;  
     private Date datecreate;
     private Date dateupdate;   
 }

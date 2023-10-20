@@ -1,5 +1,7 @@
 package com.site.siteweb.convert;
 
+import com.site.siteweb.constante.StaticListOfValues;
+import com.site.siteweb.constante.StaticValue;
 import com.site.siteweb.dto.ArticleDto;
 import com.site.siteweb.entity.ArticleEntity;
 import com.site.siteweb.helpers.DateHelper;
@@ -12,7 +14,10 @@ public class ArticleConvert {
      public ArticleDto toDto(ArticleEntity art) {
         ArticleDto dto = new ArticleDto();
         dto.setId(art.getId());
-        dto.setType(art.getType());
+        dto.setType(art.getType()); 
+			StaticListOfValues slove = new StaticListOfValues();
+			StaticValue sv = slove.getType().get(art.getType());
+			dto.setTypes(sv);  
         dto.setIdusercreate(art.getIdusercreate());
         dto.setIdusermodif(art.getIdusermodif());
         dto.setUrlfile(art.getUrlfile());
@@ -27,7 +32,7 @@ public class ArticleConvert {
         return dto;
      }
 
-          public ArticleEntity toEntity(ArticleDto art) {
+        public ArticleEntity toEntity(ArticleDto art) {
         ArticleEntity entity = new ArticleEntity();
         entity.setId(art.getId());
         entity.setType(art.getType());
