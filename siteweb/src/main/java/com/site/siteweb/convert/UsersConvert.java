@@ -22,7 +22,7 @@ public class UsersConvert {
         return dto;
      }
      
-         public UsersEntity toDto(UsersDto u) {
+         public UsersEntity toEntity(UsersDto u) {
         UsersEntity entity = new UsersEntity();
         entity.setId(u.getId());
         entity.setNom(u.getNom()); 

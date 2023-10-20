@@ -2,8 +2,10 @@ package com.site.siteweb.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+ 
+import com.site.siteweb.convert.UsersConvert;
 import com.site.siteweb.dto.LoginContent;
+import com.site.siteweb.dto.UsersDto; 
 import com.site.siteweb.entity.UsersEntity;
 import com.site.siteweb.repository.UsersRepository; 
 
@@ -23,5 +25,34 @@ public class UserService {
         }  
         
     }
+    public boolean create(UsersDto user) {
+        UsersEntity data = UsersConvert.getInstance().toEntity(user);
+        try {
+          repository.save(data);
+          return true;  
+        } catch (Exception e) {
+          return false;
+        } 
+    }
+
+     public boolean upDate(Long id,UsersDto user) {
+        user.setId(id);
+        UsersEntity data = UsersConvert.getInstance().toEntity(user);
+        try {
+          repository.save(data);
+          return true;  
+        } catch (Exception e) {
+          return false;
+        } 
+    }
+
+    public boolean delete(Long id) {
+        try {
+         repository.deleteById(id);
+          return true;
+        } catch (Exception e) {
+          return false;
+        }
+     }  
     
 }
