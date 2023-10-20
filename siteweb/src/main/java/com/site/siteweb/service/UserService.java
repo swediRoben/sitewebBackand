@@ -1,5 +1,7 @@
 package com.site.siteweb.service;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
  
@@ -40,6 +42,17 @@ public class UserService {
         UsersEntity data = UsersConvert.getInstance().toEntity(user);
         try {
           repository.save(data);
+          return true;  
+        } catch (Exception e) {
+          return false;
+        } 
+    }
+
+        public boolean bloquer(Long id) { 
+        UsersEntity user=repository.findById(id).get();
+        user.setDatfin(new Date()); 
+        try {
+          repository.save(user);
           return true;  
         } catch (Exception e) {
           return false;

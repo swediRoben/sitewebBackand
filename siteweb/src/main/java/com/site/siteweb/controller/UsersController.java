@@ -55,6 +55,21 @@ public class UsersController {
 
         }
 
+             @PutMapping("/{id}")
+      public ResponseEntity<Object> update(@RequestHeader(name = "Accept-Language", required = false) String localeString,@PathVariable("id") Long id) { 
+                boolean data = service.bloquer(id);   
+                if (data) { 
+                        return new ResponseEntity<>(
+                                        new ResponseHelper(MessageHelper.success(new Locale(localeString)),true),HttpStatus.CREATED);
+                } else {
+                        return new ResponseEntity<>(
+                                        new ResponseHelper(MessageHelper.success(new Locale(localeString)),
+                                                        false),
+                                        HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+
+        }
+
 
         @DeleteMapping("/{id}")
         public ResponseEntity<Object> daelete(@PathVariable("id") Long id,@RequestHeader(name = "Accept-Language", required = false) String localeString ) { 
