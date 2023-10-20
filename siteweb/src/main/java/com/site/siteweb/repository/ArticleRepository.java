@@ -9,19 +9,21 @@ import org.springframework.stereotype.Repository;
 import com.site.siteweb.entity.ArticleEntity;
  
 @Repository
-public interface ArticleRepository  extends JpaRepository<ArticleEntity, Long> {
-
-    Page<ArticleEntity> findById(Long id, Pageable pagingSort);
-
-    Page<ArticleEntity> findByType(Integer type, Integer langue, Pageable pagingSort);
-
-    Page<ArticleEntity> findByTypeAndTypeFichier(Integer type, Integer typeFichier, Integer typeFichier2, Pageable pagingSort);
-
-    @Query("select e from ArticleEntity e  where e.type=?1 and e.langue=?2 and e.titre like '%' || ?3  || '%' or e.content  like '%' || ?3  || '%' ")
+public interface ArticleRepository  extends JpaRepository<ArticleEntity, Long> { 
+    @Query("select e FROM ArticleEntity e  WHERE e.type=?1 and e.langue=?2 and (e.titre like '%' || ?3  || '%' or e.content  like '%' || ?3  || '%') ")
     Page<ArticleEntity> getbyTypeAndDescription(Integer type, Integer langue, String description, Pageable pagingSort);
 
-    @Query("select e from ArticleEntity e  where e.type=?1 and and e.typeFichier=?2 and e.langue=?3 and e.titre like '%' || ?4  || '%' or e.content  like '%' || ?4  || '%' ")
-    Page<ArticleEntity> getbyTypeAndTipeFichierAndDescription(Integer type, Integer typeFichier, Integer langue, String description,
+   
+    Page<ArticleEntity> findByIdAndLangue(Long id, Integer langue, Pageable pagingSort);
+
+    Page<ArticleEntity> findByTypeAndLangue(Integer type, Integer langue, Pageable pagingSort);
+ 
+    Page<ArticleEntity> findByLangue(Integer langue, Pageable pagingSort);
+
+    Page<ArticleEntity> findByTypeAndLangueAndTypefichier(Integer type, Integer langue, Integer typeFichier,
             Pageable pagingSort);
+
+     @Query("select e FROM ArticleEntity e WHERE e.type=?1 and e.langue=?2 and e.typefichier=?3 and (e.titre like '%' || ?4  || '%' or e.content  like '%' || ?4  || '%') ")
+    Page<ArticleEntity> getbyTypeAndTypeFichierAndDescriptions(Integer type, Integer langue, Integer typeFichier,String description, Pageable pagingSort);
     
 }

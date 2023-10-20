@@ -55,8 +55,8 @@ public class UsersController {
 
         }
 
-             @PutMapping("/{id}")
-      public ResponseEntity<Object> update(@RequestHeader(name = "Accept-Language", required = false) String localeString,@PathVariable("id") Long id) { 
+       @PutMapping("/bloque/{id}")
+      public ResponseEntity<Object> bloquer(@RequestHeader(name = "Accept-Language", required = false) String localeString,@PathVariable("id") Long id) { 
                 boolean data = service.bloquer(id);   
                 if (data) { 
                         return new ResponseEntity<>(

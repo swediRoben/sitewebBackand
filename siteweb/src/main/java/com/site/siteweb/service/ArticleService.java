@@ -27,17 +27,17 @@ public class ArticleService {
         Page<ArticleEntity> pg = null; 
 
         if (id != null && type == null && typeFichier == null && description == null) {
-            pg = articleRepository.findById(id, pagingSort);
+            pg = articleRepository.findByIdAndLangue(id,langue, pagingSort);
         } else if (id == null && type != null && typeFichier == null && description == null) {
-            pg = articleRepository.findByType(type,langue, pagingSort);
+            pg = articleRepository.findByTypeAndLangue(type,langue, pagingSort);
         } else if (id == null && type != null && typeFichier != null && description == null) {
-            pg = articleRepository.findByTypeAndTypeFichier(type,langue, typeFichier, pagingSort);
+            pg = articleRepository.findByTypeAndLangueAndTypefichier(type,langue, typeFichier, pagingSort);
         } else if (id == null && type != null && typeFichier == null && description != null) {
             pg = articleRepository.getbyTypeAndDescription(type,langue, description, pagingSort);
         }else if (id == null && type != null && typeFichier != null && description != null) {
-             pg = articleRepository.getbyTypeAndTipeFichierAndDescription(type,langue,typeFichier, description, pagingSort);
+             pg = articleRepository.getbyTypeAndTypeFichierAndDescriptions(type,langue,typeFichier, description, pagingSort);
         } else {
-            pg = articleRepository.findAll(pagingSort);
+            pg = articleRepository.findByLangue(langue,pagingSort);
         }
 
         List<ArticleEntity> dataEntity = pg.getContent(); 
