@@ -1,6 +1,5 @@
 package com.site.siteweb.controller;
-
-import java.io.IOException;
+ 
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -58,9 +57,9 @@ public class ConnectionController {
         System.out.println(jeton);
         boolean d=token.checkTocken(jeton);
         if (d) {
-           return "date n'est pass superieur"; 
+           return "ca passe"; 
         } else {
-           return "date est superieur"; 
+           return "ca passe pas"; 
         }
       }  
 }

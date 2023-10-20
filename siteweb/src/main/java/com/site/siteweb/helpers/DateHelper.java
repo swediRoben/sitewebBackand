@@ -1,7 +1,9 @@
 package com.site.siteweb.helpers;
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat; 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date; 
 
 public class DateHelper {
@@ -54,6 +56,22 @@ public class DateHelper {
         return date;
     }
 
+     public static LocalDate convertStringToLocalDate(String string) {
+		return LocalDate.parse(string,DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+	}
 
+	public static boolean verifyDate(String dateDebut,String dateFin)
+	{
+		LocalDate date1=convertStringToLocalDate(dateDebut);
+		LocalDate date2=convertStringToLocalDate(dateFin);
+
+		 if(date1.isEqual(date2)) {
+			return false;
+		}else if (date1.isBefore(date2)) {
+			return true;
+		}else{
+			return false;
+		}
+	}
 
 }

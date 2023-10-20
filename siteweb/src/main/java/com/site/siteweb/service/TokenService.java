@@ -63,18 +63,20 @@ public class TokenService {
       String tokens = token;
       String[] parts = tokens.split(" "); 
       String value = parts[1]; 
+         String dateFin ;
         TokenEntity tok=repoTocken.findByPasswordrolehash(value); 
+        if (tok!=null) {
+           dateFin = DateHelper.toText(tok.getDatfin());
+        }else{
+          dateFin="2000-01-01";
+        }
          Date date = new Date();
          SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String today = dateFormat.format(date); 
-       String dateFin = DateHelper.toText(tok.getDatfin());
+       
 
        System.out.println("date debut :"+today +" date fin :"+dateFin);
-        if (today!=dateFin) {
-          return true; 
-        } else {
-          return false;
-        }
+         return DateHelper.verifyDate(today, dateFin); 
     } 
         
 }
