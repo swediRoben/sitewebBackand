@@ -29,11 +29,11 @@ public class ConnectionController {
     @Autowired
     private UserService service;
 
-      @Autowired
+    @Autowired
     private TokenService token;
     
       @PostMapping("/")
-        public ResponseEntity<Object> add(@RequestHeader(name = "Accept-Language", required = false) String localeString,@RequestBody LoginContent login) { 
+      public ResponseEntity<Object> add(@RequestHeader(name = "Accept-Language", required = false) String localeString,@RequestBody LoginContent login) { 
                 boolean data = service.login(login);  
                 Map<String,String> tokenMap=new HashMap<>(); 
                 if (data) {
@@ -52,7 +52,7 @@ public class ConnectionController {
 
         }
 
-        @GetMapping("/check/")
+      @GetMapping("/check/")
       public String checkpassword(@RequestHeader("Authorization") String jeton) {
         System.out.println(jeton);
         boolean d=token.checkTocken(jeton);
