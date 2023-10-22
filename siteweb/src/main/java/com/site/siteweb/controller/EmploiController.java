@@ -33,9 +33,8 @@ public class EmploiController {
     private EmploiService service;
 
         @GetMapping("/")
-        public ResponseEntity<Object> getAll(
-                        @RequestParam(required = false) Long id, 
-                        @RequestParam(required = false) Integer name,
+        public ResponseEntity<Object> getAll(  
+                        @RequestParam(required = false) String name,
                         @RequestParam(required = false) Integer type,   
                         @RequestParam(defaultValue = "0") int page, 
                         @RequestParam(defaultValue = "0") int size,
@@ -44,7 +43,7 @@ public class EmploiController {
                 if (size == 0)
                         size = Integer.MAX_VALUE;
  
-                Map<String, Object> data = service.getAlls(id,type, page, size, sort);
+                Map<String, Object> data = service.getAlls(name,type, page, size, sort);
                 Locale locale = new Locale(localeString);
 
                 if (data.size() > 0) {

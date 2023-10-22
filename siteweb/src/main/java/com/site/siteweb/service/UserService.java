@@ -1,4 +1,5 @@
 package com.site.siteweb.service;
+ 
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,10 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
- 
-import com.site.siteweb.convert.UsersConvert; 
+
+import com.site.siteweb.convert.ArticleConvert;
+import com.site.siteweb.convert.UsersConvert;
+import com.site.siteweb.dto.ArticleDto;
 import com.site.siteweb.dto.LoginContent;
-import com.site.siteweb.dto.UsersDto; 
+import com.site.siteweb.dto.UsersDto;
+import com.site.siteweb.entity.ArticleEntity;
 import com.site.siteweb.entity.UsersEntity;
 import com.site.siteweb.helpers.PagingAndSortingHelper;
 import com.site.siteweb.repository.UsersRepository; 
@@ -97,6 +101,27 @@ public class UserService {
         } catch (Exception e) {
           return false;
         }
-     }  
+     }
+
+    public Map<String, Object> getAlls(String username, int page, int size, String[] sort) {
+         List<UsersDto> list = new ArrayList<>();
+        Pageable pagingSort = PagingAndSortingHelper.pagination(sort, page, size);
+        Page<UsersEntity> pg = null; 
+
+        if (username != null || username!="") {
+            pg = repository.getByUsernames(username, pagingSort);
+        } else{
+            pg = repository.findAll(pagingSort);
+        }
+
+        List<UsersEntity> dataEntity = pg.getContent(); 
+        for (UsersEntity g : dataEntity) { 
+            UsersDto user=UsersConvert.getInstance().toDto(g);  
+           list.add(user); 
+        }
+     
+        return PagingAndSortingHelper.filteredAndSortedResult(pg.getNumber(), pg.getTotalElements(),
+                pg.getTotalPages(), list);
+    }  
     
 }
