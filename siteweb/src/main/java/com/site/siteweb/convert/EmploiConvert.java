@@ -25,7 +25,7 @@ public class EmploiConvert {
       return dto;
    }
 
-   public EmploiEntity toDto(EmploiDto emp) {
+   public EmploiEntity toEntity(EmploiDto emp) {
       EmploiEntity entity = new EmploiEntity();
       entity.setId(emp.getId());
       entity.setMail(emp.getMail()); 
