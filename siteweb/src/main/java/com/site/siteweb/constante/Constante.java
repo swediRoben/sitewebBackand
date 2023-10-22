@@ -78,16 +78,16 @@ public class Constante {
                 return "ENGISH";
             }
         },
+        span {
+            public String toString() {
+                return "ESPAGNOL";
+            }
+        },
         kisw {
             public String toString() {
                 return "KISWAHILI";
             }
-        },
-        bu {
-            public String toString() {
-                return "KIRUNDI";
-            }
-        } 
+        }, 
     }
 
     	public enum typeMail {
