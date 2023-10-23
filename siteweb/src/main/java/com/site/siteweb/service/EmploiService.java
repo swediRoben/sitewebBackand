@@ -27,7 +27,7 @@ public class EmploiService {
         if (name != null || name!="" && type==null) {
             pg = repo.getByName(name, pagingSort);
         }else if (name != null || name!="" && type!=null) {
-            pg = repo.getByNameAndType(name, pagingSort);
+            pg = repo.getByNameAndType(name,type, pagingSort);
         } if (name == null || name=="" && type!=null) {
             pg = repo.findByTypedemende(type, pagingSort);
         }  else{

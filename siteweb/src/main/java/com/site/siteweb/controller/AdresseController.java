@@ -30,7 +30,7 @@ public class AdresseController {
     private AdresseService service;
 
         @GetMapping("/")
-        public ResponseEntity<Object> getAll() { 
+        public ResponseEntity<Object> getAll(@RequestHeader(name = "Accept-Language", required = false) String localeString) { 
                 Map<String, Object> data = service.getAlls(); 
 
                 if (data.size() > 0) {
