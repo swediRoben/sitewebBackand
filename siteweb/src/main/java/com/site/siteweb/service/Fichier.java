@@ -23,12 +23,12 @@ public class Fichier{
     }
 
     
-    public Resource loadImage(String imageUrl) throws IOException {
+    public String loadImage(String imageUrl) throws IOException {
         Path filePath = Paths.get(imageUrl);
         Resource resource = new UrlResource(filePath.toUri());
         if (!resource.exists()) {
             throw new IOException("File not found: " + imageUrl);
         }
-        return resource;
+        return resource.getURL().toString();
     }
 }

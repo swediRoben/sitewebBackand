@@ -64,11 +64,11 @@ public class PublicationController {
         }
 
 
-         @PostMapping("/")
+        @PostMapping("/")
         public ResponseEntity<Object> add(
                 @RequestHeader(name = "Accept-Language", required = false) String localeString,
                 @RequestBody ArticleDto article,
-                @RequestParam("image") MultipartFile image) { 
+                @RequestParam("file") MultipartFile image) { 
                 boolean data = service.add(article);  
         try { 
             article.setUrlfile(Fichier.getInstance().storeImage(image, 1L));
