@@ -43,6 +43,9 @@ public class ArticleService {
         List<ArticleEntity> dataEntity = pg.getContent(); 
         for (ArticleEntity g : dataEntity) { 
             ArticleDto articleDto=ArticleConvert.getInstance().toDto(g);  
+            if (articleDto.getUrlfile()!= null) {
+              articleDto.setUrlfile(Fichier.getInstance().loadImage(articleDto.getUrlfile()));
+          }
            list.add(articleDto); 
         }
      
