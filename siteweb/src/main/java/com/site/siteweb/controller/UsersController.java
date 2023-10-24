@@ -1,6 +1,4 @@
-package com.site.siteweb.controller;
- 
-import static org.mockito.Mockito.description;
+package com.site.siteweb.controller; 
 
 import java.util.Collections;
 import java.util.Locale;
@@ -35,16 +33,14 @@ public class UsersController {
     
         @GetMapping("/")
         public ResponseEntity<Object> getAll(
-                        @RequestParam(required = false) Integer username,   
+                        @RequestParam(required = false) String username,   
                         @RequestParam(defaultValue = "0") int page, 
-                        @RequestParam(defaultValue = "0") int size,
-                        @RequestHeader(name = "Accept-Language", required = false) String localeString,
+                        @RequestParam(defaultValue = "0") int size, 
                         @RequestParam(defaultValue = "id,desc") String[] sort){
                         if (size == 0)
                         size = Integer.MAX_VALUE;
  
-                Map<String, Object> data = service.getAlls(username, page, size, sort);
-                Locale locale = new Locale(localeString);
+                Map<String, Object> data = service.getAlls(username, page, size, sort); 
 
                 if (data.size() > 0) {
                         return new ResponseEntity<>(new ResponseHelper("adresse", data, true),

@@ -9,14 +9,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-
-import com.site.siteweb.convert.ArticleConvert;
-import com.site.siteweb.convert.UsersConvert;
-import com.site.siteweb.dto.ArticleDto;
+import org.springframework.stereotype.Service; 
+import com.site.siteweb.convert.UsersConvert; 
 import com.site.siteweb.dto.LoginContent;
-import com.site.siteweb.dto.UsersDto;
-import com.site.siteweb.entity.ArticleEntity;
+import com.site.siteweb.dto.UsersDto; 
 import com.site.siteweb.entity.UsersEntity;
 import com.site.siteweb.helpers.PagingAndSortingHelper;
 import com.site.siteweb.repository.UsersRepository; 
@@ -109,7 +105,7 @@ public class UserService {
         Page<UsersEntity> pg = null; 
 
         if (username != null || username!="") {
-            pg = repository.getByUsernames(username, pagingSort);
+            pg = repository.getByEmail(username, pagingSort);
         } else{
             pg = repository.findAll(pagingSort);
         }
