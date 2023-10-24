@@ -1,6 +1,7 @@
 package com.site.siteweb.entity; 
 
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,7 +21,7 @@ public class ArticleEntity {
     private Integer type;
     private Long idusercreate; 
     private Long idusermodif;   
-    private String urlfile; 
+    private List<String> urlfile; 
     private Integer typefichier;
     @Column(name = "titre", length = 500) 
     private String titre;

@@ -1,5 +1,7 @@
 package com.site.siteweb.dto;
  
+import java.util.List;
+
 import com.site.siteweb.constante.StaticValue;
 
 import lombok.Data;
@@ -12,7 +14,7 @@ public class ArticleDto {
     private Long idusermodif;  
     private String usercreate; 
     private String usermodif;   
-    private String urlfile; 
+    private List<String> urlfile; 
     private Integer typefichier;
     private String titre; 
     private String content;

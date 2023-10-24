@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.site.siteweb.convert.ArticleConvert;
 import com.site.siteweb.dto.ArticleDto;
@@ -44,7 +45,7 @@ public class ArticleService {
         for (ArticleEntity g : dataEntity) { 
             ArticleDto articleDto=ArticleConvert.getInstance().toDto(g);  
             if (articleDto.getUrlfile()!= null) {
-              articleDto.setUrlfile(Fichier.getInstance().loadImage(articleDto.getUrlfile()));
+              articleDto.setUrlfile(Uploadfile.getInstance().viewFile(articleDto.getId(),articleDto.getUrlfile()));
           }
            list.add(articleDto); 
         }
@@ -53,10 +54,13 @@ public class ArticleService {
                 pg.getTotalPages(), list);
     }
 
-    public boolean add(ArticleDto article) {
+    public boolean add(ArticleDto article,MultipartFile[] image) {
         ArticleEntity data = ArticleConvert.getInstance().toEntity(article);
+
         try {
-          articleRepository.save(data);
+         ArticleEntity dataSave= articleRepository.save(data);
+         dataSave.setUrlfile(Uploadfile.getInstance().uploardMulti(image, dataSave.getId()));
+         articleRepository.save(dataSave);
           return true;  
         } catch (Exception e) {
           return false;

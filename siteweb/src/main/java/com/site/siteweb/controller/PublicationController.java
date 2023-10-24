@@ -68,13 +68,9 @@ public class PublicationController {
         public ResponseEntity<Object> add(
                 @RequestHeader(name = "Accept-Language", required = false) String localeString,
                 @RequestBody ArticleDto article,
-                @RequestParam("file") MultipartFile image) { 
-                boolean data = service.add(article);  
-        try { 
-            article.setUrlfile(Fichier.getInstance().storeImage(image, 1L));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+                @RequestParam("files[]") MultipartFile[] image) { 
+                boolean data = service.add(article,image);  
+       
                 if (data) {
                     
                         return new ResponseEntity<>(
