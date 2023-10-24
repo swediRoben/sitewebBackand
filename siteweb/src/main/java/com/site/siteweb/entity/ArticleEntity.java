@@ -22,7 +22,9 @@ public class ArticleEntity {
     private Long idusermodif;   
     private String urlfile; 
     private Integer typefichier;
-    private String titre; 
+    @Column(name = "titre", length = 500) 
+    private String titre;
+    @Column(name = "content", length = 5000) 
     private String content;
     private Integer langue;  
     private Date datecreate;
