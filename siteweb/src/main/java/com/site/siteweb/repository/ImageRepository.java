@@ -11,5 +11,7 @@ import com.site.siteweb.entity.ImageEntity;
 public interface ImageRepository extends JpaRepository<ImageEntity,Long>{
 
     List<ImageEntity> findByIdArticle(Long idArticle);
+
+    ImageEntity findByIdUrl(String imag);
     
 }
