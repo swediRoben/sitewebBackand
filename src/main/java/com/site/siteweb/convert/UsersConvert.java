@@ -1,6 +1,6 @@
 package com.site.siteweb.convert;
  
-import com.site.siteweb.dto.UsersDto; 
+import com.site.siteweb.dto.UsersDto;
 import com.site.siteweb.entity.UsersEntity;
 import com.site.siteweb.helpers.DateHelper;
 

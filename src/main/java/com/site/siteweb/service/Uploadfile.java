@@ -1,15 +1,17 @@
 package com.site.siteweb.service;
  
-import java.io.*; 
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption; 
-import java.util.*; 
- 
-import org.springframework.core.io.ClassPathResource; 
+import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.StreamUtils;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.site.siteweb.entity.ImageEntity;

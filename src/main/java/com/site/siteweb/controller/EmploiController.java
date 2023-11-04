@@ -18,11 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.site.siteweb.dto.ArticleDto;
 import com.site.siteweb.dto.EmploiDto;
 import com.site.siteweb.helpers.MessageHelper;
 import com.site.siteweb.helpers.ResponseHelper;
-import com.site.siteweb.service.ArticleService;
 import com.site.siteweb.service.EmploiService;
 
 @RestController

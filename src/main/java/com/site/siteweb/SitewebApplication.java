@@ -12,7 +12,7 @@ public class SitewebApplication {
   @Autowired
   private MailSenderService mailService;
 	public static void main(String[] args) { 
-		SpringApplication.run(SitewebApplication.class, args); 
+		SpringApplication.run(SitewebApplication.class, args);  
 	}
 
 	// @EventListener(ApplicationReadyEvent.class)

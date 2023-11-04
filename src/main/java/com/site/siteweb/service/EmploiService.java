@@ -9,9 +9,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.site.siteweb.convert.EmploiConvert; 
-import com.site.siteweb.dto.EmploiDto; 
-import com.site.siteweb.entity.EmploiEntity; 
+import com.site.siteweb.convert.EmploiConvert;
+import com.site.siteweb.dto.EmploiDto;
+import com.site.siteweb.entity.EmploiEntity;
 import com.site.siteweb.helpers.PagingAndSortingHelper;
 import com.site.siteweb.repository.EmploiRepository;
 
