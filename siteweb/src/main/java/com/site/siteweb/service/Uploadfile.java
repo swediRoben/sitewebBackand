@@ -84,14 +84,14 @@ public class Uploadfile {
         }
     }
  
-    public void fromClasspathAsHttpServResp(HttpServletResponse response,Long id,String fileName) throws IOException { 
+    public void fromClasspathAsHttpServResp(HttpServletResponse response,Long id,String fileName)  throws IOException { 
         String path = "src/main/resources/images/" + id + "/" + fileName;
         ClassPathResource imageFile = new ClassPathResource(path); 
         StreamUtils.copy(imageFile.getInputStream(), response.getOutputStream());
     }
 
     //enregistrer plusieur fichers en meme temps 
-    public List<String> uploardMulti(MultipartFile[] file,Long id) throws IOException {
+    public List<String> uploardMulti(MultipartFile[] file,Long id) throws IOException  {
         Path path = Files.createDirectories(Paths.get("src/main/resources/images/" + id));//pour creer le nouveau dossier avec l'id de utilisateur
         List<String> list = new ArrayList<>();
         try {

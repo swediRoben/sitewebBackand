@@ -1,5 +1,6 @@
 package com.site.siteweb.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +51,7 @@ public class ArticleService {
            List<ImageEntity> img=imgRepo.findByIdArticle(g.getId());
             ArticleDto articleDto=ArticleConvert.getInstance().toDto(g); 
             if (articleDto.getTypefichier()!= null) {
-              articleDto.setFile(Uploadfile.getInstance().viewFile(articleDto.getId(),img));
+              articleDto.setFiles(Uploadfile.getInstance().viewFile(articleDto.getId(),img));
           }
            list.add(articleDto); 
         }
@@ -59,7 +60,7 @@ public class ArticleService {
                 pg.getTotalPages(), list);
     }
 
-    public boolean add(ArticleDto article,MultipartFile[] image) {
+    public boolean add(ArticleDto article,MultipartFile[] image) throws IOException {
         ArticleEntity data = ArticleConvert.getInstance().toEntity(article);
 
         try {
@@ -78,14 +79,14 @@ public class ArticleService {
         
     }
 
-    public boolean upDate(Long id, ArticleDto article,MultipartFile[] image) {
+    public boolean upDate(Long id, ArticleDto article,MultipartFile[] image)  throws IOException {
          article.setId(id);
          ArticleEntity data = ArticleConvert.getInstance().toEntity(article);
         try {
           articleRepository.save(data);
-         List<String> listImg=Uploadfile.getInstance().uploardMulti(image, article.getId()); 
+         List<String> listImg=Uploadfile.getInstance().uploardMulti(image, article.getId());  
          for (String imag : listImg) {
-          ImageEntity img=new ImageEntity();
+          ImageEntity img=imgRepo.findByIdUrl(imag); 
           img.setUrl(imag);
           img.setIdArticle(article.getId());
           imgRepo.save(img);

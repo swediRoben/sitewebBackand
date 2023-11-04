@@ -1,20 +1,20 @@
 package com.site.siteweb.controller;
-
+ 
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Locale;
 
 import java.util.Map;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+import org.springframework.beans.factory.annotation.Autowired; 
+import org.springframework.http.HttpStatus; 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,13 +25,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.site.siteweb.dto.ArticleDto;
 import com.site.siteweb.helpers.MessageHelper;
 import com.site.siteweb.helpers.ResponseHelper;
-import com.site.siteweb.service.ArticleService;
-import com.site.siteweb.service.Fichier;
+import com.site.siteweb.service.ArticleService; 
 
 @RestController
 @RequestMapping("/publication")
 @CrossOrigin(origins = "*")
 public class PublicationController {
+
     @Autowired
     private ArticleService service;
 
@@ -65,12 +65,12 @@ public class PublicationController {
         }
 
 
-        @PostMapping(value = "/",consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+        @PostMapping(value = "/")
         public ResponseEntity<Object> add(
+                @RequestParam("file") MultipartFile[] file,
                 @RequestHeader(name = "Accept-Language", required = false) String localeString,
-                @RequestBody ArticleDto article,
-                @RequestParam("files") MultipartFile[] files) { 
-                boolean data = service.add(article,files);  
+                @ModelAttribute ArticleDto article)  throws IOException { 
+                boolean data = service.add(article,file);  
        
                 if (data) {
                     
@@ -87,9 +87,13 @@ public class PublicationController {
 
         }
 
-        @PostMapping("/{id}")
-        public ResponseEntity<Object> upDate(@PathVariable("id") Long id,@RequestHeader(name = "Accept-Language", required = false) String localeString,@RequestBody ArticleDto article ) { 
-                boolean data = service.upDate(id,article);  
+        @PutMapping("/{id}")
+        public ResponseEntity<Object> upDate(
+        @RequestParam("file") MultipartFile[] file,
+        @PathVariable("id") Long id,
+        @RequestHeader(name = "Accept-Language", required = false) String localeString,
+        @ModelAttribute ArticleDto article ) throws IOException  { 
+                boolean data = service.upDate(id,article,file);  
                 if (data) {
                     
                         return new ResponseEntity<>(
