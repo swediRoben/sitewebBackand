@@ -12,6 +12,8 @@ import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.site.siteweb.entity.ImageEntity;
+
 import jakarta.servlet.http.HttpServletResponse; 
 public class Uploadfile {
 
@@ -68,14 +70,15 @@ public class Uploadfile {
         }
     }
  
-    public List<String> viewFile(Long id,List<String> filename) { 
-        List<String> file=new ArrayList<>();
+    public List<ImageEntity> viewFile(Long id,List<ImageEntity> image) { 
+        List<ImageEntity> file=new ArrayList<>();
         try {
-        for (String f : filename) {
-           String path = "src/main/resources/images/" + id + "/" + f; 
-           file.add(path); 
+        for (ImageEntity img : image) {
+           String path = "src/main/resources/images/" + id + "/" + img.getUrl(); 
+           img.setPath(path);
+           file.add(img); 
         }
-             return file;
+          return file;
         } catch (Exception e) {
              return Collections.emptyList();
         }

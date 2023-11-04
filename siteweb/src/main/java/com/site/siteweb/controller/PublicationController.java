@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -64,12 +65,12 @@ public class PublicationController {
         }
 
 
-        @PostMapping("/")
+        @PostMapping(value = "/",consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
         public ResponseEntity<Object> add(
                 @RequestHeader(name = "Accept-Language", required = false) String localeString,
                 @RequestBody ArticleDto article,
-                @RequestParam("files[]") MultipartFile[] image) { 
-                boolean data = service.add(article,image);  
+                @RequestParam("files") MultipartFile[] files) { 
+                boolean data = service.add(article,files);  
        
                 if (data) {
                     

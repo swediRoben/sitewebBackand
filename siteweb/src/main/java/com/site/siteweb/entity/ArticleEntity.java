@@ -20,8 +20,7 @@ public class ArticleEntity {
     private Long id;
     private Integer type;
     private Long idusercreate; 
-    private Long idusermodif;   
-    private List<String> urlfile; 
+    private Long idusermodif;    
     private Integer typefichier;
     @Column(name = "titre", length = 500) 
     private String titre;

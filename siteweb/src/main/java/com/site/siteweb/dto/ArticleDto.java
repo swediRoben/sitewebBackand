@@ -3,6 +3,7 @@ package com.site.siteweb.dto;
 import java.util.List;
 
 import com.site.siteweb.constante.StaticValue;
+import com.site.siteweb.entity.ImageEntity;
 
 import lombok.Data;
 @Data
@@ -14,7 +15,7 @@ public class ArticleDto {
     private Long idusermodif;  
     private String usercreate; 
     private String usermodif;   
-    private List<String> urlfile; 
+    private List<ImageEntity> file; 
     private Integer typefichier;
     private String titre; 
     private String content;

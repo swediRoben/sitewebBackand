@@ -13,14 +13,18 @@ import org.springframework.web.multipart.MultipartFile;
 import com.site.siteweb.convert.ArticleConvert;
 import com.site.siteweb.dto.ArticleDto;
 import com.site.siteweb.entity.ArticleEntity;
+import com.site.siteweb.entity.ImageEntity;
 import com.site.siteweb.helpers.PagingAndSortingHelper;
 import com.site.siteweb.repository.ArticleRepository;
+import com.site.siteweb.repository.ImageRepository;
 
 @Service
 public class ArticleService {
    @Autowired
    private ArticleRepository articleRepository;
-
+   
+   @Autowired
+   private ImageRepository imgRepo;
     public Map<String, Object> getAlls(Long id, Integer type, Integer typeFichier,Integer langue,String description, int page, int size, 
             String[] sort) {
          List<ArticleDto> list = new ArrayList<>();
@@ -43,9 +47,10 @@ public class ArticleService {
 
         List<ArticleEntity> dataEntity = pg.getContent(); 
         for (ArticleEntity g : dataEntity) { 
-            ArticleDto articleDto=ArticleConvert.getInstance().toDto(g);  
-            if (articleDto.getUrlfile()!= null) {
-              articleDto.setUrlfile(Uploadfile.getInstance().viewFile(articleDto.getId(),articleDto.getUrlfile()));
+           List<ImageEntity> img=imgRepo.findByIdArticle(g.getId());
+            ArticleDto articleDto=ArticleConvert.getInstance().toDto(g); 
+            if (articleDto.getTypefichier()!= null) {
+              articleDto.setFile(Uploadfile.getInstance().viewFile(articleDto.getId(),img));
           }
            list.add(articleDto); 
         }
@@ -59,8 +64,13 @@ public class ArticleService {
 
         try {
          ArticleEntity dataSave= articleRepository.save(data);
-         dataSave.setUrlfile(Uploadfile.getInstance().uploardMulti(image, dataSave.getId()));
-         articleRepository.save(dataSave);
+         List<String> listImg=Uploadfile.getInstance().uploardMulti(image, dataSave.getId()); 
+         for (String imag : listImg) {
+          ImageEntity img=new ImageEntity();
+          img.setUrl(imag);
+          img.setIdArticle(dataSave.getId());
+          imgRepo.save(img);
+         } 
           return true;  
         } catch (Exception e) {
           return false;
@@ -68,11 +78,18 @@ public class ArticleService {
         
     }
 
-    public boolean upDate(Long id, ArticleDto article) {
+    public boolean upDate(Long id, ArticleDto article,MultipartFile[] image) {
          article.setId(id);
          ArticleEntity data = ArticleConvert.getInstance().toEntity(article);
         try {
           articleRepository.save(data);
+         List<String> listImg=Uploadfile.getInstance().uploardMulti(image, article.getId()); 
+         for (String imag : listImg) {
+          ImageEntity img=new ImageEntity();
+          img.setUrl(imag);
+          img.setIdArticle(article.getId());
+          imgRepo.save(img);
+         } 
           return true;  
         } catch (Exception e) {
           return false;

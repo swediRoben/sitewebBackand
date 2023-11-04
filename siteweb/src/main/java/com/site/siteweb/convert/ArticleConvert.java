@@ -19,13 +19,11 @@ public class ArticleConvert {
 			StaticValue sv = slove.getType().get(art.getType());
 			dto.setTypes(sv);  
         dto.setIdusercreate(art.getIdusercreate());
-        dto.setIdusermodif(art.getIdusermodif());
-        dto.setUrlfile(art.getUrlfile());
+        dto.setIdusermodif(art.getIdusermodif()); 
         dto.setTypefichier(art.getTypefichier());
         dto.setTitre(art.getTitre());
         dto.setContent(art.getContent());
-        dto.setLangue(art.getLangue());
-        dto.setUrlfile(art.getUrlfile());
+        dto.setLangue(art.getLangue()); 
         dto.setDatecreate(DateHelper.toText(art.getDatecreate())); 
         dto.setDateupdate(DateHelper.toText(art.getDateupdate())); 
 
@@ -37,13 +35,11 @@ public class ArticleConvert {
         entity.setId(art.getId());
         entity.setType(art.getType());
         entity.setIdusercreate(art.getIdusercreate());
-        entity.setIdusermodif(art.getIdusermodif());
-        entity.setUrlfile(art.getUrlfile());
+        entity.setIdusermodif(art.getIdusermodif()); 
         entity.setTypefichier(art.getTypefichier());
         entity.setTitre(art.getTitre());
         entity.setContent(art.getContent());
-        entity.setLangue(art.getLangue());
-        entity.setUrlfile(art.getUrlfile());
+        entity.setLangue(art.getLangue()); 
         entity.setDatecreate(DateHelper.toDate(art.getDatecreate())); 
         entity.setDateupdate(DateHelper.toDate(art.getDateupdate())); 
 
