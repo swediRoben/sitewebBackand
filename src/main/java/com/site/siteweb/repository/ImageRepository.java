@@ -13,5 +13,7 @@ public interface ImageRepository extends JpaRepository<ImageEntity,Long>{
     List<ImageEntity> findByIdArticle(Long idArticle);
 
     ImageEntity findByUrl(String imag);
+
+    void deleteAllByIdArticle(Long idArticle);
     
 }

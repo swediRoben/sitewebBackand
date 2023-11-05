@@ -82,14 +82,24 @@ public class ArticleService {
     public boolean upDate(Long id, ArticleDto article,MultipartFile[] image)  throws IOException {
          article.setId(id);
          ArticleEntity data = ArticleConvert.getInstance().toEntity(article);
-        try {
+        try { 
           articleRepository.save(data);
+          List<ImageEntity> all=imgRepo.findByIdArticle(id);
+          for (ImageEntity f : all) {
+           Uploadfile.getInstance().deleteFile(id, f.getUrl());  
+          }
+          imgRepo.deleteAll(all);
+          
          List<String> listImg=Uploadfile.getInstance().uploardMulti(image, article.getId());  
          for (String imag : listImg) {
           ImageEntity img=imgRepo.findByUrl(imag); 
-          img.setUrl(imag);
-          img.setIdArticle(article.getId());
-          imgRepo.save(img);
+          if (img==null) {
+          ImageEntity im=new ImageEntity();
+          im.setUrl(imag);
+          im.setIdArticle(article.getId());
+          imgRepo.save(im); 
+          } 
+    
          } 
           return true;  
         } catch (Exception e) {
@@ -99,7 +109,12 @@ public class ArticleService {
 
     public boolean delete(Long id) {
        try {
-        articleRepository.deleteById(id);
+          articleRepository.deleteById(id);
+          List<ImageEntity> all=imgRepo.findByIdArticle(id);
+          for (ImageEntity f : all) {
+           Uploadfile.getInstance().deleteFile(id, f.getUrl());  
+          }
+          imgRepo.deleteAll(all);
          return true;
        } catch (Exception e) {
          return false;
