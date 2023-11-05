@@ -30,7 +30,7 @@ public class ContactJsonService {
          else 
             c=new ArrayList<>();
             if (contact==null) {
-                c.add(contact);
+                c.add(dto);
                 statut=whriteJsonData(c);
                 
             }
