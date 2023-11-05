@@ -28,7 +28,8 @@ public class ContactJsonService {
         public Map<String, Object> getById(Integer id) {
                 Map<String, Object> map=new HashMap<>();
               List<Contact> c=readJsonData();
-         Contact contact=c.parallelStream().filter(emp->emp.getId().equals(id)).findAny().orElse(null); 
+            //   Contact contact=c.parallelStream().filter(emp->emp.getId().equals(id)||emp.getTitre().equals("titre")).findAny().orElse(null); 
+              Contact contact=c.parallelStream().filter(emp->emp.getId().equals(id)).findAny().orElse(null); 
            map.put("content", contact); 
         return map;
     }
