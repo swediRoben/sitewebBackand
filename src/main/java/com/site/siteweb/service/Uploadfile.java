@@ -20,11 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.site.siteweb.entity.ImageEntity;
 
 import jakarta.servlet.http.HttpServletResponse; 
-    import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO; 
+    import java.awt.image.BufferedImage; 
 public class Uploadfile {
 
     public static Uploadfile getInstance() {
@@ -109,11 +105,21 @@ public class Uploadfile {
     }
 
     public void resize(MultipartFile file,String idFilename) {
-       int a=20000;
-        while (file.getSize()>= 20000) {
-             System.out.println("size *********** :"+file.getSize());
-          resized(idFilename); 
-          break;
+        Long size= size(idFilename);
+        if (size<700000 || size>=100000) {
+          resized(idFilename);   
+        }else if (size<2500000 || size>=700000) {
+            for (int i = 0; i < 1; i++) {
+               resized(idFilename);    
+            }
+        }else if (size<6000000 || size>=2500000) {
+            for (int i = 0; i < 2; i++) {
+               resized(idFilename);    
+            }
+        }else if (size<10000000 || size>=6000000) {
+            for (int i = 0; i < 3; i++) {
+               resized(idFilename);    
+            }
         } 
       } 
     
@@ -121,7 +127,6 @@ public class Uploadfile {
         try {
             // Charger l'image
             BufferedImage image = ImageIO.read(new File("src/main/resources/images/"+idfndilename));
-
             // Réduire la taille de l'image
             int width = image.getWidth() / 4;
             int height = image.getHeight() / 4;
@@ -134,9 +139,17 @@ public class Uploadfile {
             }
 
             // Enregistrer l'image réduite
-            ImageIO.write(resizedImage, "png", new File("src/main/resources/images/"+idfndilename));
+            ImageIO.write(resizedImage, "jpg", new File("src/main/resources/images/"+idfndilename));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    public Long size(String string) {
+        File file = new File("src/main/resources/images/"+string);
+        long length = file.length();
+        System.out.println("Length: " + length);
+        return length;
+     }
+    
 }
