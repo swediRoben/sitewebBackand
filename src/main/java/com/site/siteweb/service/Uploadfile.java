@@ -1,5 +1,6 @@
 package com.site.siteweb.service;
  
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -10,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,25 +20,16 @@ import org.springframework.web.multipart.MultipartFile;
 import com.site.siteweb.entity.ImageEntity;
 
 import jakarta.servlet.http.HttpServletResponse; 
+    import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO; 
 public class Uploadfile {
 
     public static Uploadfile getInstance() {
         return new Uploadfile();
-    }
-    /* @GetMapping("/file")
-   public ResponseEntity<?> uploard(@RequestParam("file") MultipartFile file)
-    {
-       String filename= file.getOriginalFilename();
-        Long size= file.getSize();
-        String content= file.getContentType();
-        String name= file.getName();
-        Map<String,Object> m=new LinkedHashMap<>();
-        m.put("images filename",filename);
-        m.put("images size",size);
-        m.put("images content",content);
-        m.put("images name",name);
-       return new ResponseEntity<>(m, HttpStatus.OK);
-    } */ 
+    } 
     public String uploard(MultipartFile file,Long id) throws IOException { 
         String filename = file.getOriginalFilename(); 
             String pathAdd = filename;
@@ -76,7 +70,7 @@ public class Uploadfile {
         List<ImageEntity> file=new ArrayList<>();
         try {
         for (ImageEntity img : image) {
-           String path = "src/main/resources/images/" + id + "/" + img.getUrl(); 
+           String path = id+"/"+img.getUrl(); 
            img.setPath(path);
            file.add(img); 
         }
@@ -109,6 +103,30 @@ public class Uploadfile {
             return list;
         } catch (IOException e) {
             return Collections.emptyList();
+        }
+    }
+
+    
+    public void resized() {
+        try {
+            // Charger l'image
+            BufferedImage image = ImageIO.read(new File("src/main/resources/images/7/téléchargement.png"));
+
+            // Réduire la taille de l'image
+            int width = image.getWidth() / 4;
+            int height = image.getHeight() / 4;
+            BufferedImage resizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++) {
+                    int color = image.getRGB(x * 4, y * 4);
+                    resizedImage.setRGB(x, y, color);
+                }
+            }
+
+            // Enregistrer l'image réduite
+            ImageIO.write(resizedImage, "png", new File("src/main/resources/images/7/téléchargement.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
