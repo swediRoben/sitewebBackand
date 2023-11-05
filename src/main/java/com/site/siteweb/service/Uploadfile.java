@@ -109,7 +109,7 @@ public class Uploadfile {
     }
 
     public void resize(MultipartFile file,String idFilename) {
-       
+       int a=20000;
         while (file.getSize()>= 20000) {
              System.out.println("size *********** :"+file.getSize());
           resized(idFilename); 
