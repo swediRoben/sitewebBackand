@@ -100,7 +100,7 @@ public class ContactJsonController {
         }
 
         @DeleteMapping("/{id}")
-        public ResponseEntity<Object> daelete(@PathVariable("id") Long id,@RequestHeader(name = "Accept-Language", required = false) String localeString ) { 
+        public ResponseEntity<Object> daelete(@PathVariable("id") Integer id,@RequestHeader(name = "Accept-Language", required = false) String localeString ) { 
                 boolean data = service.delete(id);  
                 if (data) {
                     

@@ -58,8 +58,12 @@ public class ContactJsonService {
         return statut;
     }
 
-    public boolean delete(Long id) {
-        return false;
+    public boolean delete(Integer id) {
+        boolean statut=true;
+         List<Contact> c=readJsonData();   
+         c.removeIf(emp->emp.getId().equals(id));  
+          statut=whriteJsonData(c); 
+        return statut;
     }
 
     public List<Contact> readJsonData()
