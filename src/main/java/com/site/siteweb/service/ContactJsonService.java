@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,11 +19,19 @@ import com.site.siteweb.dtoJson.Contact;
 public class ContactJsonService {
 
     public Map<String, Object> getAlls() {
-        return null;
+        Map<String, Object> map=new HashMap<>();
+         List<Contact> c=readJsonData();
+         map.put("content", c);
+        return map;
     }
 
         public Map<String, Object> getById(Integer id) {
-        return null;
+                Map<String, Object> map=new HashMap<>();
+              List<Contact> c=readJsonData();
+         Contact contact=c.parallelStream().filter(emp->emp.getId().equals(id)).findAny().orElse(null); 
+           map.put("content", contact);
+      
+        return map;
     }
 
     public boolean add(Contact dto) {
