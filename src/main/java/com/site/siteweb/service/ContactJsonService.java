@@ -8,10 +8,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.site.siteweb.dtoJson.Contact;
 
+@Service
 public class ContactJsonService {
 
     public Map<String, Object> getAlls() {
@@ -22,7 +25,7 @@ public class ContactJsonService {
         boolean statut=true;
          List<Contact> c=readJsonData();
          Contact contact=null;
-         if (!c.isEmpty())  
+         if (c!=null)  
             contact=c.parallelStream().filter(emp->emp.getId().equals(dto.getId())).findAny().orElse(null);
          else 
             c=new ArrayList<>();

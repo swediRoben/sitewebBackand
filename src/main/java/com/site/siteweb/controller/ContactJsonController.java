@@ -18,11 +18,9 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.site.siteweb.dto.AdresseDto;
 import com.site.siteweb.dtoJson.Contact;
 import com.site.siteweb.helpers.MessageHelper;
-import com.site.siteweb.helpers.ResponseHelper;
-import com.site.siteweb.service.AdresseService;
+import com.site.siteweb.helpers.ResponseHelper; 
 import com.site.siteweb.service.ContactJsonService;
 
 @RestController
