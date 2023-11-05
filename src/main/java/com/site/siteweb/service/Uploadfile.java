@@ -104,26 +104,15 @@ public class Uploadfile {
         }
     }
 
-    public void resize(MultipartFile file,String idFilename) {
-        Long size= size(idFilename);
-        if (size<700000 || size>=100000) {
-          resized(idFilename);   
-        }else if (size<2500000 || size>=700000) {
-            for (int i = 0; i < 1; i++) {
-               resized(idFilename);    
-            }
-        }else if (size<6000000 || size>=2500000) {
-            for (int i = 0; i < 2; i++) {
-               resized(idFilename);    
-            }
-        }else if (size<10000000 || size>=6000000) {
-            for (int i = 0; i < 3; i++) {
-               resized(idFilename);    
-            }
-        } 
+    public void resize(MultipartFile file,String idFilename) { 
+        String fileName = ""+file.getOriginalFilename();
+        String[] fileNameParts = fileName.split("\\."); 
+        if (file.getSize()>100000) { 
+             resized(idFilename,fileNameParts[1]);    
+            }   
       } 
     
-    public void resized(String idfndilename) {
+    public void resized(String idfndilename,String type) {
         try {
             // Charger l'image
             BufferedImage image = ImageIO.read(new File("src/main/resources/images/"+idfndilename));
@@ -139,7 +128,7 @@ public class Uploadfile {
             }
 
             // Enregistrer l'image réduite
-            ImageIO.write(resizedImage, "jpg", new File("src/main/resources/images/"+idfndilename));
+            ImageIO.write(resizedImage, type, new File("src/main/resources/images/"+idfndilename));
         } catch (IOException e) {
             e.printStackTrace();
         }
