@@ -46,6 +46,22 @@ public class ContactJsonController {
 
         }
 
+        @GetMapping("/{id}")
+        public ResponseEntity<Object> getById(@RequestHeader(name = "Accept-Language", required = false) String localeString,@PathVariable("id") Integer id) { 
+                Map<String, Object> data = service.getById(id); 
+
+                if (data.size() > 0) {
+                        return new ResponseEntity<>(new ResponseHelper("adresse", data, true),
+                                        HttpStatus.OK);
+                } else {
+                        return new ResponseEntity<>(
+                                        new ResponseHelper("empty",
+                                                        data.put("Is empty", Collections.emptyList()), false),
+                                        HttpStatus.OK);
+                }
+
+        }
+
 
          @PostMapping("/")
         public ResponseEntity<Object> add(@RequestHeader(name = "Accept-Language", required = false) String localeString,@RequestBody Contact dto) { 

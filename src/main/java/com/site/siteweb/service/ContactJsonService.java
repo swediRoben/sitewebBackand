@@ -21,6 +21,10 @@ public class ContactJsonService {
         return null;
     }
 
+        public Map<String, Object> getById(Integer id) {
+        return null;
+    }
+
     public boolean add(Contact dto) {
         boolean statut=true;
          List<Contact> c=readJsonData();
@@ -69,4 +73,6 @@ public class ContactJsonService {
         }
         return statut;
     }
+
+
 }
