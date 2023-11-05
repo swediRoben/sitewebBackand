@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.site.siteweb.constante.StaticListOfValues;
 import com.site.siteweb.helpers.ResponseHelper; 
- 
+
 
 @RestController
 @RequestMapping("/constante")
