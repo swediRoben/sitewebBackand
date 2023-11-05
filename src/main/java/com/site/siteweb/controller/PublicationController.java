@@ -1,13 +1,14 @@
 package com.site.siteweb.controller;
- 
-import java.io.IOException;
-import java.util.Collections;
+  
+import java.io.IOException; 
+import java.util.Collections; 
 import java.util.Locale;
-import java.util.Map;
-
+import java.util.Map; 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource; 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,14 +18,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestParam; 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.site.siteweb.dto.ArticleDto;
 import com.site.siteweb.helpers.MessageHelper;
 import com.site.siteweb.helpers.ResponseHelper;
-import com.site.siteweb.service.ArticleService; 
+import com.site.siteweb.service.ArticleService;
+
+import jakarta.servlet.http.HttpServletResponse; 
 
 @RestController
 @RequestMapping("/publication")
@@ -61,6 +64,13 @@ public class PublicationController {
                                         HttpStatus.OK);
                 }
 
+        } 
+
+        @GetMapping(value = "/file/{id}/{filename}")
+        public void pdf(HttpServletResponse response,@PathVariable("id") String id,@PathVariable("filename") String filename) throws IOException { 
+        String path = "/images/" + id + "/" + filename; 
+        ClassPathResource imageFile = new ClassPathResource(path);    
+        StreamUtils.copy(imageFile.getInputStream(), response.getOutputStream());
         }
 
 

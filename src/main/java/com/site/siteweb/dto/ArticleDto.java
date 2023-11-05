@@ -21,5 +21,6 @@ public class ArticleDto {
     private String content;
     private Integer langue;  
     private String datecreate;
-    private String dateupdate;   
+    private String dateupdate;  
+    private String urlFile; 
 }

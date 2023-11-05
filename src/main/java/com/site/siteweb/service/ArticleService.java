@@ -65,6 +65,12 @@ public class ArticleService {
 
         try {
          ArticleEntity dataSave= articleRepository.save(data);
+         if (dataSave.getTypefichier()==1) {
+          ImageEntity img=new ImageEntity();
+          img.setUrl(article.getUrlFile());
+          img.setIdArticle(dataSave.getId());
+          imgRepo.save(img);
+         } else {
          List<String> listImg=Uploadfile.getInstance().uploardMulti(image, dataSave.getId()); 
          for (String imag : listImg) {
           ImageEntity img=new ImageEntity();
@@ -72,6 +78,7 @@ public class ArticleService {
           img.setIdArticle(dataSave.getId());
           imgRepo.save(img);
          } 
+         }
           return true;  
         } catch (Exception e) {
           return false;
