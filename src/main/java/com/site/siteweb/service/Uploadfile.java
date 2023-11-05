@@ -37,6 +37,7 @@ public class Uploadfile {
             Path path = Files.createDirectories(Paths.get("src/main/resources/images/" + id)); 
             Path pathComplet = path.resolve(pathAdd);
             Files.copy(inputStream, pathComplet, StandardCopyOption.REPLACE_EXISTING); 
+            resize(file,id+"/"+filename);
             return "download";
         } catch (IOException e) {
             return "error download";
@@ -76,7 +77,7 @@ public class Uploadfile {
         }
           return file;
         } catch (Exception e) {
-             return Collections.emptyList();
+            return Collections.emptyList();
         }
     }
  
@@ -98,6 +99,7 @@ public class Uploadfile {
                 String pathAdd = filename;  
                 Path pathComplet = path.resolve(pathAdd);//completer les nom du fichier ou image
                 Files.copy(inputStream, pathComplet, StandardCopyOption.REPLACE_EXISTING);
+                resize(fil,id+"/"+filename);
                 list.add(filename); //pour retourner les resultats
             }
             return list;
@@ -106,11 +108,19 @@ public class Uploadfile {
         }
     }
 
+    public void resize(MultipartFile file,String idFilename) {
+       
+        while (file.getSize()>= 20000) {
+             System.out.println("size *********** :"+file.getSize());
+          resized(idFilename); 
+          break;
+        } 
+      } 
     
-    public void resized() {
+    public void resized(String idfndilename) {
         try {
             // Charger l'image
-            BufferedImage image = ImageIO.read(new File("src/main/resources/images/7/téléchargement.png"));
+            BufferedImage image = ImageIO.read(new File("src/main/resources/images/"+idfndilename));
 
             // Réduire la taille de l'image
             int width = image.getWidth() / 4;
@@ -124,7 +134,7 @@ public class Uploadfile {
             }
 
             // Enregistrer l'image réduite
-            ImageIO.write(resizedImage, "png", new File("src/main/resources/images/7/téléchargement.png"));
+            ImageIO.write(resizedImage, "png", new File("src/main/resources/images/"+idfndilename));
         } catch (IOException e) {
             e.printStackTrace();
         }
