@@ -1,6 +1,5 @@
 package com.site.siteweb.service;
-
-import java.io.File;
+ 
 import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,7 +19,19 @@ public class ContactJsonService {
     }
 
     public boolean add(Contact dto) {
-        return false;
+        boolean statut=true;
+         List<Contact> c=readJsonData();
+         Contact contact=null;
+         if (!c.isEmpty())  
+            contact=c.parallelStream().filter(emp->emp.getId().equals(dto.getId())).findAny().orElse(null);
+         else 
+            c=new ArrayList<>();
+            if (contact==null) {
+                c.add(contact);
+                statut=whriteJsonData(c);
+                
+            }
+        return statut;
     }
 
     public boolean upDate(Long id, Contact dto) {
