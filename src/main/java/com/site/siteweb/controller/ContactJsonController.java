@@ -82,7 +82,7 @@ public class ContactJsonController {
         }
 
         @PutMapping("/{id}")
-        public ResponseEntity<Object> upDate(@PathVariable("id") Long id,@RequestHeader(name = "Accept-Language", required = false) String localeString,@RequestBody Contact dto) { 
+        public ResponseEntity<Object> upDate(@PathVariable("id") Integer id,@RequestHeader(name = "Accept-Language", required = false) String localeString,@RequestBody Contact dto) { 
                 boolean data = service.upDate(id,dto);  
                 if (data) {
                     

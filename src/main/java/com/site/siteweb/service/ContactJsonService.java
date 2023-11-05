@@ -49,8 +49,13 @@ public class ContactJsonService {
         return statut;
     }
 
-    public boolean upDate(Long id, Contact dto) {
-        return false;
+    public boolean upDate(Integer id, Contact dto) {
+         boolean statut=true;
+         List<Contact> c=readJsonData();   
+         c.removeIf(emp->emp.getId().equals(id)); 
+          c.add(dto);
+          statut=whriteJsonData(c); 
+        return statut;
     }
 
     public boolean delete(Long id) {
