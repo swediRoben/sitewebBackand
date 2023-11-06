@@ -6,4 +6,5 @@ import lombok.Data;
 public class Menu {
     private Integer id;
     private String menu; 
+    private Integer langue;
 }
