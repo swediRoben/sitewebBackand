@@ -98,15 +98,16 @@ public class ArticleService {
          article.setId(id);
          ArticleEntity data = ArticleConvert.getInstance().toEntity(article);
         try { 
-          articleRepository.save(data);
-          List<ImageEntity> all=imgRepo.findByIdArticle(id);
+          ArticleEntity dataSave=articleRepository.save(data);
+          List<ImageEntity> all=imgRepo.findByIdArticle(dataSave.getId());
           for (ImageEntity f : all) {
-           Uploadfile.getInstance().deleteFile(id, f.getUrl());  
+           Uploadfile.getInstance().deleteFile(dataSave.getId(), f.getUrl());  
           }
           imgRepo.deleteAll(all);
           
-         List<String> listImg=Uploadfile.getInstance().uploardMulti(image, article.getId());  
-         for (String imag : listImg) {
+         if (dataSave.getTypefichier()==0) {
+          List<String> listImg=Uploadfile.getInstance().uploardMulti(image, dataSave.getId()); 
+          for (String imag : listImg) {
           ImageEntity img=imgRepo.findByUrl(imag); 
           if (img==null) {
           ImageEntity im=new ImageEntity();
@@ -114,6 +115,30 @@ public class ArticleService {
           im.setIdArticle(article.getId());
           imgRepo.save(im); 
           } 
+         }
+        }else if(dataSave.getTypefichier()==2) {
+           List<String> listImg=Uploadfile.getInstance().uploardMultiPdf(image, dataSave.getId()); 
+           for (String imag : listImg) {
+          ImageEntity img=imgRepo.findByUrl(imag); 
+          if (img==null) {
+          ImageEntity im=new ImageEntity();
+          im.setUrl(imag);
+          im.setIdArticle(article.getId());
+          imgRepo.save(im); 
+          } 
+         }
+        }else{ 
+          ImageEntity img=imgRepo.findByUrl(article.getUrlFile()); 
+          if (img==null) {
+          ImageEntity im=new ImageEntity();
+          im.setUrl(article.getUrlFile());
+          im.setIdArticle(article.getId());
+          imgRepo.save(im);  
+         }else{
+           img.setUrl(article.getUrlFile());
+          img.setIdArticle(article.getId());
+          imgRepo.save(img);  
+         } 
     
          } 
           return true;  
