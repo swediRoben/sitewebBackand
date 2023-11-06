@@ -19,17 +19,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.site.siteweb.dtoJson.Menu;
+import com.site.siteweb.dtoJson.DescriptionMenu;
 import com.site.siteweb.helpers.MessageHelper;
-import com.site.siteweb.helpers.ResponseHelper;  
-import com.site.siteweb.service.MenuJsonService;
+import com.site.siteweb.helpers.ResponseHelper;   
+import com.site.siteweb.service.DescriptionMenuJsonService;
 
 @RestController
-@RequestMapping("/menu")
+@RequestMapping("/descriptionMenu")
 @CrossOrigin(origins = "*")
-public class MenuJsonController {
+public class DescriptionJsonController {
      @Autowired
-    private MenuJsonService service;
+    private DescriptionMenuJsonService service;
 
         @GetMapping("/")
         public ResponseEntity<Object> getAll(@RequestHeader(name = "Accept-Language", required = false) String localeString) { 
@@ -81,7 +81,7 @@ public class MenuJsonController {
 
 
          @PostMapping("/")
-        public ResponseEntity<Object> add(@RequestHeader(name = "Accept-Language", required = false) String localeString,@RequestBody Menu dto) { 
+        public ResponseEntity<Object> add(@RequestHeader(name = "Accept-Language", required = false) String localeString,@RequestBody DescriptionMenu dto) { 
                 boolean data = service.add(dto);  
                 if (data) {
                     
@@ -99,7 +99,7 @@ public class MenuJsonController {
         }
 
         @PutMapping("/{id}")
-        public ResponseEntity<Object> upDate(@PathVariable("id") Integer id,@RequestHeader(name = "Accept-Language", required = false) String localeString,@RequestBody Menu dto) { 
+        public ResponseEntity<Object> upDate(@PathVariable("id") Integer id,@RequestHeader(name = "Accept-Language", required = false) String localeString,@RequestBody DescriptionMenu dto) { 
                 boolean data = service.upDate(id,dto);  
                 if (data) {
                     
