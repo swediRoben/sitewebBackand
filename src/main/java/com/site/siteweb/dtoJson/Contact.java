@@ -7,4 +7,5 @@ public class Contact {
     private Integer id;
     private String titre;
     private String content;
+    private Integer langue;
 }

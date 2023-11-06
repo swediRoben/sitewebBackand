@@ -25,6 +25,14 @@ public class ContactJsonService {
         return map;
     }
 
+      public Map<String, Object> getByIdAndLangue(Integer id,Integer langue) {
+          Map<String, Object> map=new HashMap<>();
+              List<Contact> c=readJsonData();
+              Contact contact=c.parallelStream().filter(emp->emp.getId().equals(id)&&emp.getLangue().equals(langue)).findAny().orElse(null); 
+            map.put("content", contact); 
+        return map;
+    }
+
         public Map<String, Object> getById(Integer id) {
                 Map<String, Object> map=new HashMap<>();
               List<Contact> c=readJsonData();
@@ -39,7 +47,7 @@ public class ContactJsonService {
          List<Contact> c=readJsonData();
          Contact contact=null;
          if (c!=null)  
-            contact=c.parallelStream().filter(emp->emp.getId().equals(dto.getId())).findAny().orElse(null);
+            contact=c.parallelStream().filter(emp->emp.getId().equals(dto.getId())&&emp.getLangue().equals(dto.getLangue())).findAny().orElse(null);
          else 
             c=new ArrayList<>();
             if (contact==null) {
@@ -53,7 +61,7 @@ public class ContactJsonService {
     public boolean upDate(Integer id, Contact dto) {
          boolean statut=true;
          List<Contact> c=readJsonData();   
-         c.removeIf(emp->emp.getId().equals(id)); 
+         c.removeIf(emp->emp.getId().equals(id)&&emp.getLangue().equals(dto.getLangue())); 
           c.add(dto);
           statut=whriteJsonData(c); 
         return statut;
