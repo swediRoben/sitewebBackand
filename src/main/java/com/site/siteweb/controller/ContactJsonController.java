@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.site.siteweb.dtoJson.Contact;
@@ -33,6 +34,22 @@ public class ContactJsonController {
         @GetMapping("/")
         public ResponseEntity<Object> getAll(@RequestHeader(name = "Accept-Language", required = false) String localeString) { 
                 Map<String, Object> data = service.getAlls(); 
+
+                if (data.size() > 0) {
+                        return new ResponseEntity<>(new ResponseHelper("adresse", data, true),
+                                        HttpStatus.OK);
+                } else {
+                        return new ResponseEntity<>(
+                                        new ResponseHelper("empty",
+                                                        data.put("Is empty", Collections.emptyList()), false),
+                                        HttpStatus.OK);
+                }
+
+        }
+
+         @GetMapping("/by")
+        public ResponseEntity<Object> getByIdAndLangue(@RequestHeader(name = "Accept-Language", required = false) String localeString,@RequestParam(required = false) Integer id,@RequestParam(required = false) Integer langue) { 
+                Map<String, Object> data = service.getByIdAndLangue(id,langue); 
 
                 if (data.size() > 0) {
                         return new ResponseEntity<>(new ResponseHelper("adresse", data, true),
