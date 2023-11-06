@@ -94,7 +94,7 @@ public class DescriptionJsonController {
 
          @PostMapping("/")
         public ResponseEntity<Object> add(@RequestHeader(name = "Accept-Language", required = false) String localeString,
-                @RequestParam("file") MultipartFile[] file,@RequestBody DescriptionMenu dto) { 
+                @RequestParam("file") MultipartFile[] file,@RequestBody DescriptionMenu dto) throws IOException { 
                 boolean data = service.add(dto,file);  
                 if (data) {
                     
@@ -112,7 +112,7 @@ public class DescriptionJsonController {
         }
 
         @PutMapping("/{id}")
-        public ResponseEntity<Object> upDate(@PathVariable("id") Integer id,@RequestHeader(name = "Accept-Language", required = false) String localeString,@RequestParam("file") MultipartFile[] file,@RequestBody DescriptionMenu dto) { 
+        public ResponseEntity<Object> upDate(@PathVariable("id") Integer id,@RequestHeader(name = "Accept-Language", required = false) String localeString,@RequestParam("file") MultipartFile[] file,@RequestBody DescriptionMenu dto) throws IOException { 
                 boolean data = service.upDate(id,file,dto);  
                 if (data) {
                     

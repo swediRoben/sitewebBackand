@@ -1,6 +1,7 @@
 package com.site.siteweb.service;
  
 import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.site.siteweb.dtoJson.DescriptionMenu;
+import com.site.siteweb.dtoJson.DescriptionMenu; 
 
 @Service
 public class DescriptionMenuJsonService {
@@ -43,7 +44,7 @@ public class DescriptionMenuJsonService {
         return map;
     }
 
-    public boolean add(DescriptionMenu dto, MultipartFile[] file) {
+    public boolean add(DescriptionMenu dto, MultipartFile[] file) throws IOException {
         boolean statut=true;
          List<DescriptionMenu> c=readJsonData();
          DescriptionMenu d=null;
@@ -52,6 +53,10 @@ public class DescriptionMenuJsonService {
          else 
             c=new ArrayList<>();
             if (d==null) {
+            List<String> listImg=Uploadfile.getInstance().uploardMulti(file, Long.valueOf(dto.getId())); 
+            for (String imag : listImg) {
+            dto.setImageUrl(imag);
+            }
                 c.add(dto);
                 statut=whriteJsonData(c);
                 
@@ -59,10 +64,14 @@ public class DescriptionMenuJsonService {
         return statut;
     }
 
-    public boolean upDate(Integer id, MultipartFile[] file, DescriptionMenu dto) {
+    public boolean upDate(Integer id, MultipartFile[] file, DescriptionMenu dto) throws IOException {
          boolean statut=true;
          List<DescriptionMenu> c=readJsonData();   
          c.removeIf(emp->emp.getId().equals(id)&&emp.getLangue().equals(dto.getLangue())); 
+          List<String> listImg=Uploadfile.getInstance().uploardMulti(file, Long.valueOf(dto.getId())); 
+            for (String imag : listImg) {
+            dto.setImageUrl(imag);
+            }
           c.add(dto);
           statut=whriteJsonData(c); 
         return statut;
