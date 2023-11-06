@@ -67,7 +67,7 @@ public class PublicationController {
         } 
 
         @GetMapping(value = "/file/{id}/{filename}")
-        public void pdf(HttpServletResponse response,@PathVariable("id") String id,@PathVariable("filename") String filename) throws IOException { 
+        public void getfile(HttpServletResponse response,@PathVariable("id") String id,@PathVariable("filename") String filename) throws IOException { 
         String path = "/images/" + id + "/" + filename; 
         ClassPathResource imageFile = new ClassPathResource(path);    
         StreamUtils.copy(imageFile.getInputStream(), response.getOutputStream());

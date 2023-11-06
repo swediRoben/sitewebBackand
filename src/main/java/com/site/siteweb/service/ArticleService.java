@@ -70,6 +70,14 @@ public class ArticleService {
           img.setUrl(article.getUrlFile());
           img.setIdArticle(dataSave.getId());
           imgRepo.save(img);
+         } else  if (dataSave.getTypefichier()==2) {
+          List<String> listImg=Uploadfile.getInstance().uploardMultiPdf(image, dataSave.getId()); 
+         for (String imag : listImg) {
+          ImageEntity img=new ImageEntity();
+          img.setUrl(imag);
+          img.setIdArticle(dataSave.getId());
+          imgRepo.save(img);
+         } 
          } else {
          List<String> listImg=Uploadfile.getInstance().uploardMulti(image, dataSave.getId()); 
          for (String imag : listImg) {

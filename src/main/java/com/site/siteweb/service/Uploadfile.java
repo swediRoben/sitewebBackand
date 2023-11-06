@@ -104,6 +104,25 @@ public class Uploadfile {
         }
     }
 
+     public List<String> uploardMultiPdf(MultipartFile[] file,Long id) throws IOException  {
+        Path path = Files.createDirectories(Paths.get("src/main/resources/images/" + id));//pour creer le nouveau dossier avec l'id de utilisateur
+        List<String> list = new ArrayList<>();
+        try {
+
+            for (MultipartFile fil : file) {
+                InputStream inputStream = fil.getInputStream();
+                String filename = fil.getOriginalFilename();
+                String pathAdd = filename;  
+                Path pathComplet = path.resolve(pathAdd);//completer les nom du fichier ou image
+                Files.copy(inputStream, pathComplet, StandardCopyOption.REPLACE_EXISTING); 
+                list.add(filename); //pour retourner les resultats
+            }
+            return list;
+        } catch (IOException e) {
+            return Collections.emptyList();
+        }
+    }
+
     public void resize(MultipartFile file,String idFilename) { 
         String fileName = ""+file.getOriginalFilename();
         String[] fileNameParts = fileName.split("\\."); 

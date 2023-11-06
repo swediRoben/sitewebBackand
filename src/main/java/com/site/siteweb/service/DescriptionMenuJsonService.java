@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -42,7 +43,7 @@ public class DescriptionMenuJsonService {
         return map;
     }
 
-    public boolean add(DescriptionMenu dto) {
+    public boolean add(DescriptionMenu dto, MultipartFile[] file) {
         boolean statut=true;
          List<DescriptionMenu> c=readJsonData();
          DescriptionMenu d=null;
@@ -58,7 +59,7 @@ public class DescriptionMenuJsonService {
         return statut;
     }
 
-    public boolean upDate(Integer id, DescriptionMenu dto) {
+    public boolean upDate(Integer id, MultipartFile[] file, DescriptionMenu dto) {
          boolean statut=true;
          List<DescriptionMenu> c=readJsonData();   
          c.removeIf(emp->emp.getId().equals(id)&&emp.getLangue().equals(dto.getLangue())); 
