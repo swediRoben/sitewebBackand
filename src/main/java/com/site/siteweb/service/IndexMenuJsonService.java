@@ -15,39 +15,39 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.site.siteweb.dtoJson.DescriptionMenu; 
+import com.site.siteweb.dtoJson.Index; 
 
 @Service
-public class DescriptionMenuJsonService {
+public class IndexMenuJsonService {
 
     public Map<String, Object> getAlls() {
         Map<String, Object> map=new HashMap<>();
-         List<DescriptionMenu> c=readJsonData();
+         List<Index> c=readJsonData();
          map.put("content", c);
         return map;
     }
 
       public Map<String, Object> getByIdAndLangue(Integer id,Integer langue) {
           Map<String, Object> map=new HashMap<>();
-              List<DescriptionMenu> c=readJsonData();
-              DescriptionMenu d=c.parallelStream().filter(emp->emp.getId().equals(id)&&emp.getLangue().equals(langue)).findAny().orElse(null); 
+              List<Index> c=readJsonData();
+              Index d=c.parallelStream().filter(emp->emp.getId().equals(id)&&emp.getLangue().equals(langue)).findAny().orElse(null); 
             map.put("content", d); 
         return map;
     }
 
         public Map<String, Object> getById(Integer id) {
                 Map<String, Object> map=new HashMap<>();
-              List<DescriptionMenu> c=readJsonData();
-            //   DescriptionMenu descriptionmenu=c.parallelStream().filter(emp->emp.getId().equals(id)||emp.getTitre().equals("titre")).findAny().orElse(null); 
-              DescriptionMenu d=c.parallelStream().filter(emp->emp.getId().equals(id)).findAny().orElse(null); 
+              List<Index> c=readJsonData();
+            //   Index index=c.parallelStream().filter(emp->emp.getId().equals(id)||emp.getTitre().equals("titre")).findAny().orElse(null); 
+              Index d=c.parallelStream().filter(emp->emp.getId().equals(id)).findAny().orElse(null); 
            map.put("content", d); 
         return map;
     }
 
-    public boolean add(DescriptionMenu dto, MultipartFile[] file) throws IOException {
+    public boolean add(Index dto, MultipartFile[] file) throws IOException {
         boolean statut=true;
-         List<DescriptionMenu> c=readJsonData();
-         DescriptionMenu d=null;
+         List<Index> c=readJsonData();
+         Index d=null;
          if (c!=null)  
             d=c.parallelStream().filter(emp->emp.getId().equals(dto.getId())&&emp.getLangue().equals(dto.getLangue())).findAny().orElse(null);
          else 
@@ -64,9 +64,9 @@ public class DescriptionMenuJsonService {
         return statut;
     }
 
-    public boolean upDate(Integer id, MultipartFile[] file, DescriptionMenu dto) throws IOException {
+    public boolean upDate(Integer id, MultipartFile[] file, Index dto) throws IOException {
          boolean statut=true;
-         List<DescriptionMenu> c=readJsonData();   
+         List<Index> c=readJsonData();   
          c.removeIf(emp->emp.getId().equals(id)&&emp.getLangue().equals(dto.getLangue())); 
           List<String> listImg=Uploadfile.getInstance().uploardMulti(file, Long.valueOf(dto.getId())); 
             for (String imag : listImg) {
@@ -79,28 +79,28 @@ public class DescriptionMenuJsonService {
 
     public boolean delete(Integer id) {
         boolean statut=true;
-         List<DescriptionMenu> c=readJsonData();   
+         List<Index> c=readJsonData();   
          c.removeIf(emp->emp.getId().equals(id));  
           statut=whriteJsonData(c); 
         return statut;
     }
 
-    public List<DescriptionMenu> readJsonData()
+    public List<Index> readJsonData()
     {
-        List<DescriptionMenu> c=new ArrayList<>();
+        List<Index> c=new ArrayList<>();
         try {
-            String path=Files.readString(Path.of("src/main/resources/json/descriptionmenu.json"));
-            c=new Gson().fromJson(path, new TypeToken<List<DescriptionMenu>>(){}.getType());
+            String path=Files.readString(Path.of("src/main/resources/json/index.json"));
+            c=new Gson().fromJson(path, new TypeToken<List<Index>>(){}.getType());
             return c;
         } catch (Exception e) {
             return Collections.emptyList();
         }
     }
 
-      public boolean whriteJsonData(List<DescriptionMenu> c)
+      public boolean whriteJsonData(List<Index> c)
     {
         boolean statut=false; 
-        try(FileWriter file=new FileWriter("src/main/resources/json/descriptionmenu.json")){
+        try(FileWriter file=new FileWriter("src/main/resources/json/index.json")){
             file.write(new Gson().toJson(c));
             file.flush();
             statut=true;
