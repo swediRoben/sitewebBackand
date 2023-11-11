@@ -63,14 +63,22 @@ public class Uploadfile {
         }
     }
  
-    public List<ImageEntity> viewFile(Long id,List<ImageEntity> image) { 
+    public List<ImageEntity> viewFile(Long id,List<ImageEntity> image,Integer typeFile) { 
         List<ImageEntity> file=new ArrayList<>();
         try {
-        for (ImageEntity img : image) {
+        if (typeFile==1) {
+            for (ImageEntity img : image) {
+           String path =img.getUrl(); 
+           img.setPath(path);
+           file.add(img); 
+        }} else{
+            for (ImageEntity img : image) {
            String path = id+"/"+img.getUrl(); 
            img.setPath(path);
            file.add(img); 
         }
+        } 
+       
           return file;
         } catch (Exception e) {
             return Collections.emptyList();

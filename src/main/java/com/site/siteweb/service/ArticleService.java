@@ -51,7 +51,7 @@ public class ArticleService {
            List<ImageEntity> img=imgRepo.findByIdArticle(g.getId());
             ArticleDto articleDto=ArticleConvert.getInstance().toDto(g); 
             if (articleDto.getTypefichier()!= null) {
-              articleDto.setImage(Uploadfile.getInstance().viewFile(articleDto.getId(),img));
+              articleDto.setImage(Uploadfile.getInstance().viewFile(articleDto.getId(),img,articleDto.getTypefichier()));
           }
            list.add(articleDto); 
         }
@@ -69,7 +69,6 @@ public class ArticleService {
           ImageEntity img=new ImageEntity();
           img.setUrl(article.getUrlFile());
           img.setIdArticle(dataSave.getId());
-          img.setPath(article.getUrlFile());
           imgRepo.save(img);
          } else  if (dataSave.getTypefichier()==2) {
           List<String> listImg=Uploadfile.getInstance().uploardMultiPdf(image, dataSave.getId()); 
@@ -134,12 +133,10 @@ public class ArticleService {
           ImageEntity im=new ImageEntity();
           im.setUrl(article.getUrlFile());
           im.setIdArticle(article.getId());
-          im.setPath(article.getUrlFile());
           imgRepo.save(im);  
          }else{
            img.setUrl(article.getUrlFile());
           img.setIdArticle(article.getId());
-           img.setPath(article.getUrlFile());
           imgRepo.save(img);  
          } 
     
