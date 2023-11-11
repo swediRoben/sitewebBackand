@@ -87,7 +87,7 @@ public class IndexJsonController {
 
         @GetMapping(value = "/file/{id}/{filename}")
         public void getfile(HttpServletResponse response,@PathVariable("id") String id,@PathVariable("filename") String filename) throws IOException { 
-        String path = "/images/" + id + "/" + filename; 
+        String path = "/json/imagesJson/" + id + "/" + filename; 
         ClassPathResource imageFile = new ClassPathResource(path);    
         StreamUtils.copy(imageFile.getInputStream(), response.getOutputStream());
         }

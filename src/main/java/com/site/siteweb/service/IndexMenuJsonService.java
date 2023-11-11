@@ -53,7 +53,7 @@ public class IndexMenuJsonService {
          else 
             c=new ArrayList<>();
             if (d==null) {
-            List<String> listImg=Uploadfile.getInstance().uploardMulti(file, Long.valueOf(dto.getId())); 
+            List<String> listImg=Uploadfile.getInstance().uploardJSONFILE(file, Long.valueOf(dto.getId())); 
             for (String imag : listImg) {
             dto.setImageUrl(imag);
             }
@@ -68,7 +68,7 @@ public class IndexMenuJsonService {
          boolean statut=true;
          List<Index> c=readJsonData();   
          c.removeIf(emp->emp.getId().equals(id)&&emp.getLangue().equals(dto.getLangue())); 
-          List<String> listImg=Uploadfile.getInstance().uploardMulti(file, Long.valueOf(dto.getId())); 
+          List<String> listImg=Uploadfile.getInstance().uploardJSONFILE(file, Long.valueOf(dto.getId())); 
             for (String imag : listImg) {
             dto.setImageUrl(imag);
             }
