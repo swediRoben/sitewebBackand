@@ -2,6 +2,7 @@ package com.site.siteweb.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -64,6 +65,9 @@ public class ArticleService {
         ArticleEntity data = ArticleConvert.getInstance().toEntity(article);
 
         try {
+          Date current=new Date();
+          data.setDatecreate(current);
+          data.setDateupdate(current);
          ArticleEntity dataSave= articleRepository.save(data);
          if (dataSave.getTypefichier()==1) {
           ImageEntity img=new ImageEntity();
@@ -98,6 +102,8 @@ public class ArticleService {
          article.setId(id);
          ArticleEntity data = ArticleConvert.getInstance().toEntity(article);
         try { 
+           Date current=new Date();
+          data.setDateupdate(current);
           ArticleEntity dataSave=articleRepository.save(data);
           List<ImageEntity> all=imgRepo.findByIdArticle(dataSave.getId());
           for (ImageEntity f : all) {

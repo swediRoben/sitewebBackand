@@ -41,9 +41,7 @@ public class ArticleConvert {
         entity.setTypefichier(art.getTypefichier());
         entity.setTitre(art.getTitre());
         entity.setContent(art.getContent());
-        entity.setLangue(art.getLangue()); 
-        entity.setDatecreate(DateHelper.toDate(art.getDatecreate())); 
-        entity.setDateupdate(DateHelper.toDate(art.getDateupdate())); 
+        entity.setLangue(art.getLangue());  
 
         return entity;
      }
