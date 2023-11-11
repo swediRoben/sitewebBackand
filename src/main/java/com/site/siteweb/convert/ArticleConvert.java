@@ -16,8 +16,10 @@ public class ArticleConvert {
         dto.setId(art.getId());
         dto.setType(art.getType()); 
 			StaticListOfValues slove = new StaticListOfValues();
-			StaticValue sv = slove.getType().get(art.getType());
+         if (art.getType()!=null) {
+           		StaticValue sv = slove.getType().get(art.getType());
 			dto.setTypes(sv);  
+         } 
         dto.setIdusercreate(art.getIdusercreate());
         dto.setIdusermodif(art.getIdusermodif()); 
         dto.setTypefichier(art.getTypefichier());

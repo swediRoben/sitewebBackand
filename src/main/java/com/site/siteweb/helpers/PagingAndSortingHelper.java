@@ -40,7 +40,7 @@ Map<String, Object> dtos = new HashMap<>();
 dtos.put("currentPage", number + 1);
 dtos.put("totalItems", totalItem);
 dtos.put("totalPages", totPage);
-dtos.put("contents", data);
+dtos.put("content", data);
 return dtos;
 }
 }

@@ -76,9 +76,9 @@ public class PublicationController {
 
         @PostMapping(value = "/")
         public ResponseEntity<Object> add(
-                @RequestParam("file") MultipartFile[] file,
+                @RequestParam("file[]") MultipartFile[] file,
                 @RequestHeader(name = "Accept-Language", required = false) String localeString,
-                @ModelAttribute ArticleDto article)  throws IOException { 
+                @ModelAttribute ArticleDto article)  throws IOException {  
                 boolean data = service.add(article,file);  
        
                 if (data) {

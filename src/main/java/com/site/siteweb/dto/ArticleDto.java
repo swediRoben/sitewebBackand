@@ -15,7 +15,7 @@ public class ArticleDto {
     private Long idusermodif;  
     private String usercreate; 
     private String usermodif;   
-    private List<ImageEntity> files; 
+    private List<ImageEntity> image; 
     private Integer typefichier;
     private String titre; 
     private String content;
