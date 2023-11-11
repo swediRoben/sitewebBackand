@@ -35,9 +35,7 @@ public class ArticleConvert {
         public ArticleEntity toEntity(ArticleDto art) {
         ArticleEntity entity = new ArticleEntity();
         entity.setId(art.getId());
-        entity.setType(art.getType());
-        entity.setIdusercreate(art.getIdusercreate());
-        entity.setIdusermodif(art.getIdusermodif()); 
+        entity.setType(art.getType()); 
         entity.setTypefichier(art.getTypefichier());
         entity.setTitre(art.getTitre());
         entity.setContent(art.getContent());

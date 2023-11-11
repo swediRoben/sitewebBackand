@@ -68,6 +68,8 @@ public class ArticleService {
           Date current=new Date();
           data.setDatecreate(current);
           data.setDateupdate(current);
+          data.setIdusercreate(article.getIdusercreate());
+          data.setIdusermodif(article.getIdusercreate());
          ArticleEntity dataSave= articleRepository.save(data);
          if (dataSave.getTypefichier()==1) {
           ImageEntity img=new ImageEntity();
@@ -103,7 +105,8 @@ public class ArticleService {
          ArticleEntity data = ArticleConvert.getInstance().toEntity(article);
         try { 
            Date current=new Date();
-          data.setDateupdate(current);
+          data.setDateupdate(current); 
+          data.setIdusermodif(article.getIdusercreate());
           ArticleEntity dataSave=articleRepository.save(data);
           List<ImageEntity> all=imgRepo.findByIdArticle(dataSave.getId());
           for (ImageEntity f : all) {
