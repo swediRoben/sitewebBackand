@@ -81,7 +81,8 @@ public class ContactJsonController {
 
 
          @PostMapping("/")
-        public ResponseEntity<Object> add(@RequestHeader(name = "Accept-Language", required = false) String localeString,@RequestBody Contact dto) { 
+        public ResponseEntity<Object> add(@RequestHeader(name = "Accept-Language", required = false) String localeString,
+        @RequestBody Contact dto) { 
                 boolean data = service.add(dto);  
                 if (data) {
                     

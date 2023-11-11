@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -94,7 +94,7 @@ public class DescriptionJsonController {
 
          @PostMapping("/")
         public ResponseEntity<Object> add(@RequestHeader(name = "Accept-Language", required = false) String localeString,
-                @RequestParam("file") MultipartFile[] file,@RequestBody DescriptionMenu dto) throws IOException { 
+                @RequestParam("file[]") MultipartFile[] file,@ModelAttribute DescriptionMenu dto) throws IOException { 
                 boolean data = service.add(dto,file);  
                 if (data) {
                     
@@ -112,7 +112,8 @@ public class DescriptionJsonController {
         }
 
         @PutMapping("/{id}")
-        public ResponseEntity<Object> upDate(@PathVariable("id") Integer id,@RequestHeader(name = "Accept-Language", required = false) String localeString,@RequestParam("file") MultipartFile[] file,@RequestBody DescriptionMenu dto) throws IOException { 
+        public ResponseEntity<Object> upDate(@PathVariable("id") Integer id,@RequestHeader(name = "Accept-Language", required = false) String localeString,
+        @RequestParam("file") MultipartFile[] file,@ModelAttribute DescriptionMenu dto) throws IOException { 
                 boolean data = service.upDate(id,file,dto);  
                 if (data) {
                     
