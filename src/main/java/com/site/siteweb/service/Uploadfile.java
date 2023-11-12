@@ -113,7 +113,7 @@ public class Uploadfile {
     }
 
      public List<String> uploardJSONFILE(MultipartFile[] file,Long id) throws IOException  {
-        Path path = Files.createDirectories(Paths.get("src/main/resources/json/imagesJson" + id));//pour creer le nouveau dossier avec l'id de utilisateur
+        Path path = Files.createDirectories(Paths.get("src/main/resources/json/imagesJson/" + id));//pour creer le nouveau dossier avec l'id de utilisateur
         List<String> list = new ArrayList<>();
         try {
 
@@ -123,7 +123,7 @@ public class Uploadfile {
                 String pathAdd = filename;  
                 Path pathComplet = path.resolve(pathAdd);//completer les nom du fichier ou image
                 Files.copy(inputStream, pathComplet, StandardCopyOption.REPLACE_EXISTING);
-                resize(fil,id+"/"+filename);
+                resizeJson(fil,id+"/"+filename);
                 list.add(filename); //pour retourner les resultats
             }
             return list;
@@ -182,10 +182,40 @@ public class Uploadfile {
         }
     }
 
+    public void resizeJson(MultipartFile file,String idFilename) { 
+        String fileName = ""+file.getOriginalFilename();
+        String[] fileNameParts = fileName.split("\\."); 
+        if (file.getSize()>100000) { 
+             resizedJson(idFilename,fileNameParts[1]);    
+            }   
+      } 
+    
+    public void resizedJson(String idfndilename,String type) {
+        try {
+            // Charger l'image
+            BufferedImage image = ImageIO.read(new File("src/main/resources/json/imagesJson"+idfndilename));
+            // Réduire la taille de l'image
+            int width = image.getWidth() / 4;
+            int height = image.getHeight() / 4;
+            BufferedImage resizedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++) {
+                    int color = image.getRGB(x * 4, y * 4);
+                    resizedImage.setRGB(x, y, color);
+                }
+            }
+
+            // Enregistrer l'image réduite
+            ImageIO.write(resizedImage, type, new File("src/main/resources/images/"+idfndilename));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public Long size(String string) {
         File file = new File("src/main/resources/images/"+string);
-        long length = file.length();
-        System.out.println("Length: " + length);
+        long length = file.length(); 
         return length;
      }
     

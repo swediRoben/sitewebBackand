@@ -45,6 +45,7 @@ public class IndexMenuJsonService {
     }
 
     public boolean add(Index dto, MultipartFile[] file) throws IOException {
+        System.out.println("file :"+file[0].getOriginalFilename());
         boolean statut=true;
          List<Index> c=readJsonData();
          Index d=null;

@@ -93,9 +93,12 @@ public class IndexJsonController {
         }
 
          @PostMapping("/")
-        public ResponseEntity<Object> add(@RequestHeader(name = "Accept-Language", required = false) String localeString,
-                @RequestParam("file[]") MultipartFile[] file,@ModelAttribute Index dto) throws IOException { 
-                boolean data = service.add(dto,file);  
+        public ResponseEntity<Object> add(
+                @RequestParam("file[]") MultipartFile[] file,
+                @RequestHeader(name = "Accept-Language", required = false) String localeString,
+                @ModelAttribute Index dto) throws IOException {  
+                        System.out.println("file :"+file[0].getOriginalFilename());
+                        boolean data = service.add(dto,file);  
                 if (data) {
                     
                         return new ResponseEntity<>(
@@ -112,8 +115,11 @@ public class IndexJsonController {
         }
 
         @PutMapping("/{id}")
-        public ResponseEntity<Object> upDate(@PathVariable("id") Integer id,@RequestHeader(name = "Accept-Language", required = false) String localeString,
-        @RequestParam("file[]") MultipartFile[] file,@ModelAttribute Index dto) throws IOException { 
+        public ResponseEntity<Object> upDate(
+        @RequestParam("file[]") MultipartFile[] file,
+        @PathVariable("id") Integer id,
+        @RequestHeader(name = "Accept-Language", required = false) String localeString,
+        @ModelAttribute Index dto) throws IOException { 
                 boolean data = service.upDate(id,file,dto);  
                 if (data) {
                     
