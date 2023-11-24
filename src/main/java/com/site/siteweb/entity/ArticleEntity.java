@@ -21,9 +21,9 @@ public class ArticleEntity {
     private Long idusercreate; 
     private Long idusermodif;    
     private Integer typefichier;
-    @Column(name = "titre", length = 500) 
+    @Column(name = "titre",length = "555") 
     private String titre;
-    @Column(name = "content", length = 5000) 
+    @Column(name = "content",columnDefinition = "longtext") 
     private String content;
     private Integer langue;  
     private Date datecreate;
