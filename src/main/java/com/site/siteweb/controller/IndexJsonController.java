@@ -96,8 +96,7 @@ public class IndexJsonController {
         public ResponseEntity<Object> add(
                 @RequestParam("file[]") MultipartFile[] file,
                 @RequestHeader(name = "Accept-Language", required = false) String localeString,
-                @ModelAttribute Index dto) throws IOException {  
-                        System.out.println("file :"+file[0].getOriginalFilename());
+                @ModelAttribute Index dto) throws IOException {   
                         boolean data = service.add(dto,file);  
                 if (data) {
                     

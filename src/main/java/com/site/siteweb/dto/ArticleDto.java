@@ -17,9 +17,11 @@ public class ArticleDto {
     private String usermodif;   
     private List<ImageEntity> image; 
     private Integer typefichier;
+    private StaticValue typefichiers;
     private String titre; 
     private String content;
     private Integer langue;  
+    private StaticValue langues;
     private String datecreate;
     private String dateupdate;  
     private String urlFile; 

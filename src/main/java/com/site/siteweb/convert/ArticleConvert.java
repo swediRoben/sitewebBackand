@@ -20,6 +20,14 @@ public class ArticleConvert {
            		StaticValue sv = slove.getType().get(art.getType());
 			dto.setTypes(sv);  
          } 
+          if (art.getTypefichier()!=null) {
+           		StaticValue sv = slove.getTypeFichier().get(art.getTypefichier());
+			dto.setTypefichiers(sv); 
+         } 
+             if (art.getLangue()!=null) {
+           		StaticValue sv = slove.getLangue().get(art.getLangue());
+			dto.setLangues(sv); 
+         } 
         dto.setIdusercreate(art.getIdusercreate());
         dto.setIdusermodif(art.getIdusermodif()); 
         dto.setTypefichier(art.getTypefichier());
